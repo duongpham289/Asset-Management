@@ -1,0 +1,81 @@
+.m-navbar {
+  width: 226px;
+  height: 100vh;
+  background-color: #1c3048;
+  position: relative;
+}
+
+/* navbar header */
+.m-navbar .m-navbar-header {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 15px;
+}
+
+.m-navbar .m-navbar-header .navbar-header-logo {
+  /* background-image: url(../../assets/icon/QLTS-Icon-16x16.ico); */
+  background-color: #fff;
+  width: 36px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.m-navbar .m-navbar-header .navbar-header-title {
+  color: #fff;
+  font-size: 25px;
+}
+
+/* navbar list */
+.m-navbar .m-navbar-list {
+  padding: 15px 11px 0 11px;
+}
+
+.m-navbar .m-navbar-list .navbar-item {
+  cursor: pointer;
+  position: relative;
+  height: 40px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.m-navbar .m-navbar-list .navbar-item:hover,
+.m-navbar .m-navbar-list .navbar-item.navbar-selected {
+  background-color: #1aa4c8;
+}
+
+.m-navbar .m-navbar-list .navbar-item .navbar-logo {
+  width: 44px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.m-navbar .m-navbar-list .navbar-item .navbar-item-title {
+  display: flex;
+  align-items: center;
+}
+
+.m-navbar .m-navbar-list .navbar-item .navbar-item-title .navbar-down {
+  position: absolute;
+  right: 10px;
+}
+
+/* navbar close */
+.m-navbar .close-navbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #afafaf;
+  height: 44px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px;
+}

@@ -1,0 +1,36 @@
+@import url(./layout/navbar.css);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto;
+  font-size: 13px;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/font/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: Roboto Bold;
+  src: url(../assets/font/Roboto-Bold.ttf);
+}
+
+@font-face {
+  font-family: Roboto Italic;
+  src: url(../assets/font/Roboto-Italic.ttf);
+}
+
+.m-layout {
+  display: flex;
+  width: 100%;
+}
+
+.m-main {
+  width: calc(100% - 225px);
+}
