@@ -1,0 +1,23 @@
+.m-checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #090f39;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .m-checkbox-selected {
+    background: url("/src/assets/icon/qlts-icon.png") no-repeat -157px -377px;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    border: none;
+  }
+  
+  .m-checkbox-selected:hover,
+  .m-checkbox:hover {
+    cursor: pointer;
+    outline: 3px solid rgba(26, 164, 200, 0.2);
+  }

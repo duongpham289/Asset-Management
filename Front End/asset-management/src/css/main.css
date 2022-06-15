@@ -1,5 +1,6 @@
 @import url(./layout/navbar.css);
 @import url(./base/button.css);
+@import url(./base/checkbox.css);
 
 * {
   padding: 0;
