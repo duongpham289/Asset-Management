@@ -2,6 +2,7 @@
 @import url(./base/button.css);
 @import url(./base/checkbox.css);
 @import url(./base/loading.css);
+@import url(./base/toast.css);
 * {
   padding: 0;
   margin: 0;
