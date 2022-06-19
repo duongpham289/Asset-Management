@@ -1,0 +1,12 @@
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\bin\Debug\net6.0\HUST.Core.deps.json
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\bin\Debug\net6.0\HUST.Core.dll
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\bin\Debug\net6.0\HUST.Core.pdb
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.AssemblyInfo.cs
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.dll
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\refint\HUST.Core.dll
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.pdb
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\ref\HUST.Core.dll

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Gw99ds3+WZ9yN3GJRkH/zUVB7SZBu38PHzN4H3qEkcdxUqojGhojlGSH3YSywnEszRP/IN64W9THwojKMZTxKQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ADMIN\\Documents\\HUST_Asset_Management\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ADMIN\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\mysqlconnector\\2.1.10\\mysqlconnector.2.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}
