@@ -10,3 +10,5 @@ C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Co
 C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\refint\HUST.Core.dll
 C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.pdb
 C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\ref\HUST.Core.dll
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.Resources.HUSTResource.resources
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.csproj.GenerateResource.cache

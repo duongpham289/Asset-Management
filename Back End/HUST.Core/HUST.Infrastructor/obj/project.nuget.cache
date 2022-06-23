@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "Ag+jpQ755MvEI37lb3cQbFMXXd/88dotP3pmPMMc6W8WtpQ8IdgJXJ9n8D+6F1JWkJCZkQhQkuEv8JneShMPXg==",
+  "dgSpecHash": "qTac+NI2OtP2nt55WEchpXsAFCO38j00gPkS66FOATK0azG6rA/N3TIEYTaW+Azx3MzjLBUCAvhIcN0ZuQtvpQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\ADMIN\\Documents\\HUST_Asset_Management\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
-    "C:\\Users\\ADMIN\\.nuget\\packages\\mysqlconnector\\2.1.10\\mysqlconnector.2.1.10.nupkg.sha512"
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\mysqlconnector\\2.1.10\\mysqlconnector.2.1.10.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
