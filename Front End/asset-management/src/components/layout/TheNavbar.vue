@@ -2,7 +2,7 @@
   <div class="m-navbar" :style="{ width: navBarWidth + 'px' }">
     <div class="m-navbar-header">
       <div class="navbar-header-logo"></div>
-      <div v-if="!isNavBarClose" class="navbar-header-title">MISA QLTS</div>
+      <div v-if="!isNavBarClose" class="navbar-header-title">QLTS</div>
     </div>
 
     <ul class="m-navbar-list">
