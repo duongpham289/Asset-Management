@@ -1,4 +1,6 @@
 ﻿using HUST.Core.Interfaces.Respositories;
+using HUST.Core.Interfaces.Services;
+using HUST.Core.Services;
 using HUST.Infrastructor.Repository;
 using Newtonsoft.Json.Serialization;
 
@@ -35,14 +37,15 @@ builder.Services.AddMvc()
 
 // Cấu hình Dependency Injection:
 
-//Repository
+
+// Cấu hình Dependency Injection:
 builder.Services.AddScoped<IFixedAssetRepository, FixedAssetRepository>();
 builder.Services.AddScoped<IFixedAssetCategoryRepository, FixedAssetCategoryRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
-//Service
 
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 
 
 var app = builder.Build();

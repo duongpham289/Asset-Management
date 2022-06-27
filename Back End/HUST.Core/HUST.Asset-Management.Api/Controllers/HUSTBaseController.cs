@@ -1,5 +1,6 @@
 ﻿using HUST.Core.Exceptions;
 using HUST.Core.Interfaces.Respositories;
+using HUST.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,15 +8,17 @@ namespace HUST.Asset_Management.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public abstract class MISABaseController<T> : ControllerBase
+    public abstract class HUSTBaseController<T> : ControllerBase
     {
         #region Fiels
+        IBaseService<T> _baseService;
         IBaseRepository<T> _baseRepository;
         #endregion
 
         #region Contructtor
-        public MISABaseController( IBaseRepository<T> baseRepository)
+        public HUSTBaseController(IBaseService<T> baseService, IBaseRepository<T> baseRepository)
         {
+            _baseService = baseService;
             _baseRepository = baseRepository;
         }
         #endregion
@@ -45,7 +48,7 @@ namespace HUST.Asset_Management.Api.Controllers
         /// </summary>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        // GET api/<MISABaseController>/5
+        // GET api/<MISABaseController>/
         [HttpGet("{entityId}")]
         public IActionResult Get(Guid entityId)
         {
@@ -60,7 +63,46 @@ namespace HUST.Asset_Management.Api.Controllers
             }
         }
 
- 
+        /// <summary>
+        /// Xử lí thêm mới dữ liệu
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        // POST api/<MISABaseController>
+        [HttpPost]
+        public IActionResult Post([FromBody] T entity)
+        {
+            try
+            {
+                var res = _baseService.InsertService(entity);
+                return StatusCode(201, res);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Xử lí sửa đối tượng 
+        /// </summary>
+        /// <param name="entityId"> Id của đôi tượng </param>
+        /// <param name="entity"> Dữ liệu mới </param>
+        /// <returns></returns>
+        // PUT api/<MISABaseController>/5
+        [HttpPut("{entityId}")]
+        public virtual IActionResult Put(Guid entityId, [FromBody] T entity)
+        {
+            try
+            {
+                var res = _baseService.UpdateService(entityId, entity);
+                return StatusCode(200, res);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
 
         /// <summary>
         /// Xử lí xóa đối tượng theo Id

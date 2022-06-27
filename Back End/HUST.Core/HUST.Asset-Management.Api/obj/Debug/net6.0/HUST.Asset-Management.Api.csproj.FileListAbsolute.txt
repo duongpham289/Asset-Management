@@ -31,3 +31,7 @@ C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Co
 C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Asset-Management.Api\bin\Debug\net6.0\HUST.Infrastructor.dll
 C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Asset-Management.Api\bin\Debug\net6.0\HUST.Core.pdb
 C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Asset-Management.Api\bin\Debug\net6.0\HUST.Infrastructor.pdb
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Asset-Management.Api\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Asset-Management.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Asset-Management.Api\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\ADMIN\Documents\HUST_Asset_Management\Asset-Management\Back End\HUST.Core\HUST.Asset-Management.Api\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

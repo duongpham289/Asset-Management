@@ -11,8 +11,4 @@
     <PackageReference Include="MySqlConnector" Version="2.1.10" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\Services\" />
-  </ItemGroup>
-
 </Project>
