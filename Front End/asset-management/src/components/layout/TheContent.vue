@@ -166,7 +166,28 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
+  async beforeMount() {
+    await this.getAssetData();
+  },
+  methods: {
+    async getAssetData() {
+      // this.isLoading = true;
+      try {
+        const res = await axios.get(
+          'https://62616774327d3896e27b58d2.mockapi.io/api/asset'
+        );
+        console.log(res.data);
+        this.assetData = res.data;
+        // this.totalAssetListLength = res.data.length;
+        // console.log(this.totalAssetListLength);
+        // this.isLoading = false;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
   data() {
     return {
       assetData: {},
