@@ -3,10 +3,12 @@ import App from './App.vue';
 import Button from './components/base/basebutton.vue';
 import Checkbox from './components/base/basecheckbox.vue';
 import Dialog from './components/base/basedialog.vue';
+import Input from './components/base/baseinput.vue';
 
 const app = createApp(App);
 app.component('BaseButton', Button);
 app.component('BaseCheckbox', Checkbox);
 app.component('BaseDialog', Dialog);
+app.component('BaseInput', Input);
 
 app.mount('#app');

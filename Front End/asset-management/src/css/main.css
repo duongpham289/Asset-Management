@@ -9,6 +9,7 @@
 @import url(./base/table.css);
 @import url(./base/toast.css);
 @import url(./base/search.css);
+@import url(./base/input.css);
 
 * {
   padding: 0;

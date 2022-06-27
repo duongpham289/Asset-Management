@@ -15,11 +15,11 @@
         </div>
         <div class="toolbar-field combobox-field">
           <!-- <BaseCombobox></BaseCombobox> -->
-          <input class="m-input" />
+          <BaseInput class="m-input"></BaseInput>
         </div>
 
         <div class="toolbar-field combobox-field">
-          <input class="m-input" />
+          <BaseInput class="m-input"></BaseInput>
           <!-- <BaseCombobox></BaseCombobox> -->
         </div>
       </div>
