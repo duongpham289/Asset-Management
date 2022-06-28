@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HUST.Core.Enum
 {
-    internal class HUSTEnum
+    public class HUSTEnum
     {
     }
 }

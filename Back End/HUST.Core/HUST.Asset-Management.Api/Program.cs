@@ -40,6 +40,7 @@ builder.Services.AddMvc()
 
 // Cấu hình Dependency Injection:
 builder.Services.AddScoped<IFixedAssetRepository, FixedAssetRepository>();
+builder.Services.AddScoped<IFixedAssetService, FixedAssetService>();
 builder.Services.AddScoped<IFixedAssetCategoryRepository, FixedAssetCategoryRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 

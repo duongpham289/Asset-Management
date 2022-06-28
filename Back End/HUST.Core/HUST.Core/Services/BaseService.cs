@@ -77,7 +77,7 @@ namespace HUST.Core.Services
             // lấy FiendLy Name của entity:
             if (_baseRepository.CheckCodeExist(entityCodeToCheck, entityId) == true)
             {
-                ValidateErrorsMsg.Add(string.Format("Error", entityFriendlyName));
+                ValidateErrorsMsg.Add(string.Format("Code", entityFriendlyName));
             }
 
             // Thực hiện thêm mới dữ liệu: 
@@ -90,7 +90,7 @@ namespace HUST.Core.Services
                 var validateError = new ValidateError();
                 validateError.UserMsg = "Đã có lỗi";
                 validateError.Data = ValidateErrorsMsg;
-                throw new HUSTException("error", ValidateErrorsMsg);
+                throw new HUSTException("Code", ValidateErrorsMsg);
             }
         }
 
@@ -127,7 +127,7 @@ namespace HUST.Core.Services
                 if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == ""))
                 {
                     isValidate = false;
-                    ValidateErrorsMsg.Add(string.Format("Error", propFriendlyName));
+                    ValidateErrorsMsg.Add(string.Format("", propFriendlyName));
                 }
 
                 // 2. Thông tin giới hạn về độ dài
@@ -138,7 +138,7 @@ namespace HUST.Core.Services
                     if (propValue.ToString().Length > maxLength)
                     {
                         isValidate = false;
-                        ValidateErrorsMsg.Add(string.Format("Error", propFriendlyName, maxLength));
+                        ValidateErrorsMsg.Add(string.Format("", propFriendlyName, maxLength));
                     }
                 }
             }

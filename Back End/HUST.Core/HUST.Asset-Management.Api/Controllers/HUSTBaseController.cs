@@ -8,6 +8,7 @@ namespace HUST.Asset_Management.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+
     public abstract class HUSTBaseController<T> : ControllerBase
     {
         #region Fiels
@@ -123,7 +124,7 @@ namespace HUST.Asset_Management.Api.Controllers
             }
         }
 
-        #endregion 
+        #endregion
         /// <summary>
         /// Xử lí lỗi Exception
         /// </summary>
@@ -145,5 +146,7 @@ namespace HUST.Asset_Management.Api.Controllers
                 return StatusCode(500, res);
         }
     }
+
+
 }
 

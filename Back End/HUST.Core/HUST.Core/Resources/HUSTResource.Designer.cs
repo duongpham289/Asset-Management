@@ -22,7 +22,7 @@ namespace HUST.Core.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class HUSTResource {
+    public class HUSTResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace HUST.Core.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HUST.Core.Resources.HUSTResource", typeof(HUSTResource).Assembly);
@@ -51,7 +51,7 @@ namespace HUST.Core.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace HUST.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Tên tài sản không được phép để trống.
         /// </summary>
-        internal static string ErrorValidate_FixedAsset_Name_NotEmpty {
+        public static string ErrorValidate_FixedAsset_Name_NotEmpty {
             get {
                 return ResourceManager.GetString("ErrorValidate_FixedAsset_Name_NotEmpty", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace HUST.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} đã tồn tại trong hệ thống.
         /// </summary>
-        internal static string ErrorValidate_PropertyDuplicate {
+        public static string ErrorValidate_PropertyDuplicate {
             get {
                 return ResourceManager.GetString("ErrorValidate_PropertyDuplicate", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace HUST.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Thông tin {0} không được vượt quá {1} ký tự.
         /// </summary>
-        internal static string ErrorValidate_ProperyMaxLength {
+        public static string ErrorValidate_ProperyMaxLength {
             get {
                 return ResourceManager.GetString("ErrorValidate_ProperyMaxLength", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace HUST.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Thông tin {0} không được phép để trống.
         /// </summary>
-        internal static string ErrorValidate_ProperyNottNull {
+        public static string ErrorValidate_ProperyNottNull {
             get {
                 return ResourceManager.GetString("ErrorValidate_ProperyNottNull", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace HUST.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dữ liệu đầu vào không hợp lệ.
         /// </summary>
-        internal static string ErrorValidate_VN {
+        public static string ErrorValidate_VN {
             get {
                 return ResourceManager.GetString("ErrorValidate_VN", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace HUST.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Có lỗi xảy ra, vui lòng liên hệ HUST để được hỗ trợ thêm.
         /// </summary>
-        internal static string VN_Error_System {
+        public static string VN_Error_System {
             get {
                 return ResourceManager.GetString("VN_Error_System", resourceCulture);
             }
