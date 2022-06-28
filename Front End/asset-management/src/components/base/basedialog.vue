@@ -216,5 +216,9 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+export default {
+  name: 'base-dialog',
+};
+</script>
 <style></style>
