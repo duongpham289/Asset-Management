@@ -10,7 +10,7 @@
         <div class="modal-row">
           <div class="modal-field">
             <label>Mã tài sản <span>*</span></label>
-            <MISAInput
+            <BaseInput
               :required="true"
               ref="FixedAssetCode"
               type="text"
@@ -18,11 +18,11 @@
               placeholder="Nhập mã tài sản"
               v-model="asset.FixedAssetCode"
               name="Mã tài sản"
-            ></MISAInput>
+            ></BaseInput>
           </div>
           <div class="modal-field modal-field-long">
             <label for="input">Tên tài sản <span>*</span></label>
-            <MISAInput
+            <BaseInput
               :required="true"
               ref="FixedAssetName"
               maxlength="255"
@@ -30,7 +30,7 @@
               placeholder="Nhập tên tài sản"
               v-model="asset.FixedAssetName"
             >
-            </MISAInput>
+            </BaseInput>
           </div>
         </div>
 
@@ -51,7 +51,7 @@
           </div>
           <div class="modal-field modal-field-long">
             <label for="input">Tên bộ phận sử dụng</label>
-            <MISAInput disabled v-model="asset.DepartmentName"> </MISAInput>
+            <BaseInput disabled v-model="asset.DepartmentName"> </BaseInput>
           </div>
         </div>
 
@@ -72,17 +72,17 @@
           </div>
           <div class="modal-field modal-field-long">
             <label for="input">Tên loại tài sản</label>
-            <MISAInput
+            <BaseInput
               disabled
               v-model="asset.FixedAssetCategoryName"
-            ></MISAInput>
+            ></BaseInput>
           </div>
         </div>
 
         <div class="modal-row">
           <div class="modal-field">
             <label for="input">Số lượng<span> *</span></label>
-            <MISAInput
+            <BaseInput
               :required="true"
               :isNumber="true"
               name="Số lượng"
@@ -94,7 +94,7 @@
                 asset.Quantity < 1 ? (asset.Quantity = 0) : asset.Quantity--
               "
               @keydown.up="asset.Quantity++"
-            ></MISAInput>
+            ></BaseInput>
             <div class="spin-button-container">
               <div class="up" @click="asset.Quantity++"></div>
               <div
@@ -107,7 +107,7 @@
           </div>
           <div class="modal-field">
             <label for="input">Nguyên giá <span>*</span></label>
-            <MISAInput
+            <BaseInput
               maxlength="25"
               :required="true"
               :isNumber="true"
@@ -115,11 +115,11 @@
               name="Nguyên giá"
               classParent="number-input"
               v-model="Cost"
-            ></MISAInput>
+            ></BaseInput>
           </div>
           <div class="modal-field">
             <label for="input">Số năm sử dụng <span>*</span></label>
-            <MISAInput
+            <BaseInput
               ref="LifeTime"
               maxlength="11"
               :required="true"
@@ -127,14 +127,14 @@
               name="Số năm sử dụng"
               classParent="number-input"
               v-model="asset.LifeTime"
-            ></MISAInput>
+            ></BaseInput>
           </div>
         </div>
 
         <div class="modal-row">
           <div class="modal-field">
             <label for="input">Tỉ lệ hao mòn(%) <span>*</span></label>
-            <MISAInput
+            <BaseInput
               ref="DepreciationRate"
               maxlength="11"
               :isNumber="true"
@@ -144,7 +144,7 @@
               name="Tỉ lệ hao mòn"
               classParent="number-input-icon"
               v-model="DepreciationRate"
-            ></MISAInput>
+            ></BaseInput>
 
             <div class="spin-button-container">
               <div class="up" @click="DepreciationRate++"></div>
@@ -161,7 +161,7 @@
 
           <div class="modal-field">
             <label for="input">Giá trị hao mòm năm <span>*</span></label>
-            <MISAInput
+            <BaseInput
               ref="DepreciationValue"
               :required="true"
               :isNumber="true"
@@ -170,48 +170,48 @@
               name="Giá trị hao mòm năm"
               classParent="number-input"
               v-model="DepreciationValue"
-            ></MISAInput>
+            ></BaseInput>
           </div>
           <div class="modal-field">
             <label for="input">Năm theo dõi</label>
-            <MISAInput
+            <BaseInput
               classParent="number-input"
               disabled
               v-model="asset.TrackedYear"
-            ></MISAInput>
+            ></BaseInput>
           </div>
         </div>
 
         <div class="modal-row">
           <div class="modal-field">
             <label for="input">Ngày mua <span>*</span></label>
-            <MISADatepicker
+            <Datepicker
               :required="true"
               name="Ngày mua"
               ref="purchaseDate"
               v-model="asset.PurchaseDate"
-            ></MISADatepicker>
+            ></Datepicker>
           </div>
           <div class="modal-field">
             <label for="input">Ngày bắt đầy sử dụng <span>*</span></label>
-            <MISADatepicker
+            <Datepicker
               :required="true"
               name="Ngày bắt đầu sử dụng"
               ref="UseDate"
               v-model="asset.UseDate"
-            ></MISADatepicker>
+            ></Datepicker>
           </div>
         </div>
       </form>
 
       <div class="m-modal-footer">
-        <MISAButton
+        <BaseButton
           style="border: none"
           type="outline-button"
           @click="onCancel"
           buttonTitle="Hủy"
-        ></MISAButton>
-        <MISAButton @click="onSubmit($event)" buttonTitle="Lưu"></MISAButton>
+        ></BaseButton>
+        <BaseButton @click="onSubmit($event)" buttonTitle="Lưu"></BaseButton>
       </div>
     </div>
   </div>
