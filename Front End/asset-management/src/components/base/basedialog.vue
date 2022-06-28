@@ -224,7 +224,7 @@ import {
   toast_msg,
 } from "../../assets/resource/ResourceMsg";
 export default {
-  name: 'base-dialog',
+  name: "base-dialog",
   props: [
     "assetSelected",
     "dialogTitle",
@@ -390,7 +390,15 @@ export default {
         this.asset.DepreciationRate *
         this.asset.ProductionYear;
     },
-  }
+  },
+  data() {
+    return {
+      assetCopy: {},
+      asset: {},
+      errorList: [],
+      firstEmptyElement: null,
+    };
+  },
 };
 </script>
 <style></style>
