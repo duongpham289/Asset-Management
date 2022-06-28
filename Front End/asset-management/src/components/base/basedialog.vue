@@ -217,8 +217,180 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import {
+  cancel_msg,
+  error_msg,
+  toast_msg,
+} from "../../assets/resource/ResourceMsg";
 export default {
   name: 'base-dialog',
+  props: [
+    "assetSelected",
+    "dialogTitle",
+    "isEditing",
+    "departmentData",
+    "categoryData",
+  ],
+
+  beforeMount() {
+    // Gắn dữ liệu:
+    this.asset = this.assetSelected;
+
+    // Gán giá trị cho trường Năm theo dõi:
+    this.asset.TrackedYear = new Date().getFullYear();
+  },
+
+  mounted() {
+    // Focus vào ô input đầu
+    this.$refs.FixedAssetCode.setFocus();
+
+    // Tạo ra obj đầu vào để so sánh
+    this.assetCopy = Object.assign({}, this.asset);
+  },
+  computed: {
+    /**
+     * Mô tả : Tính giá trị hao mòn năm
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    DepreciationValue: {
+      get() {
+        return this.formatSalary(this.asset.DepreciationValue.toString());
+      },
+      set(newValue) {
+        newValue = newValue.replaceAll(".", "");
+        this.asset.DepreciationValue = newValue;
+      },
+    },
+
+    /**
+     * Mô tả : format tiền (nguyên giá)
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    Cost: {
+      get() {
+        return this.formatSalary(this.asset.Cost.toString());
+      },
+      set(newValue) {
+        newValue = newValue.replaceAll(".", "");
+        this.asset.Cost = newValue;
+        // Tính giá trị hao mòn năm
+        this.asset.DepreciationValue = Math.floor(
+          this.asset.Cost * this.asset.DepreciationRate
+        );
+      },
+    },
+
+    /**
+     * Mô tả : Hiển thị tỉ lệ hao mòm
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    DepreciationRate: {
+      get() {
+        return this.asset.DepreciationRate * 100;
+      },
+      set(newValue) {
+        this.asset.DepreciationRate = newValue / 100;
+        this.asset.DepreciationValue =
+          this.asset.DepreciationRate * this.asset.Cost;
+      },
+    },
+  },
+
+  watch: {
+    "this.asset.PurchaseDate"(newValue) {
+      console.log(newValue);
+    },
+    /**
+     * Mô tả : Theo dõi sự thay đổi của mã loại tài sản để gán dữ liệu cho các trường input
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    "asset.FixedAssetCategoryCode"(newValue) {
+      var data = this.categoryData.find(
+        (item) => item.FixedAssetCategoryCode == newValue
+      );
+      if (!data) {
+        this.asset.FixedAssetCategoryName = "";
+        this.asset.DepreciationRate = "";
+        this.asset.LifeTime = "";
+      }
+    },
+    /**
+     * Mô tả : Theo dõi sự thay đổi của mã bộ phận sử dụng để gán dữ liệu cho các trường input
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    "asset.DepartmentCode"(newValue) {
+      var data = this.departmentData.find(
+        (item) => item.DepartmentCode == newValue
+      );
+      if (data) {
+        this.asset.DepartmentName = data.DepartmentName;
+      } else {
+        this.asset.DepartmentName = "";
+      }
+    },
+  },
+
+  methods: {
+    /**
+     * Mô tả : format tiền
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    formatSalary(value) {
+      var format = `${value.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+      return format;
+    },
+
+    /**
+     * Mô tả : Tính Giá trị hao mòn khi chọn combobox
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    autoFieldCombobox(option) {
+      this.asset.DepreciationRate = option.DepreciationRate;
+      this.asset.FixedAssetCategoryName = option.FixedAssetCategoryName;
+      this.asset.LifeTime = option.LifeTime;
+      // Tính giá trị hao mòn năm:
+      this.asset.DepreciationValue =
+        this.asset.Cost * this.asset.DepreciationRate;
+    },
+
+    /**
+     * Mô tả : Tính những giá trị còn lại để đẩy lên api
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    autoFieldData() {
+      // Ngày tạo
+      if (!this.isEditing) {
+        this.asset.CreatedDate = new Date();
+      }
+      // Ngày sứa
+      this.asset.ModifiedDate = new Date();
+      // Tính Năm sử dụng(Năm hiện tại - năm ngày bắt đầu sử dụng)
+      this.asset.ProductionYear =
+        this.asset.TrackedYear - new Date(this.asset.UseDate).getFullYear();
+      // Tính Lũy kế
+      this.asset.Accumulated =
+        this.asset.Cost *
+        this.asset.DepreciationRate *
+        this.asset.ProductionYear;
+    },
+  }
 };
 </script>
 <style></style>
