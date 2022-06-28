@@ -38,7 +38,7 @@
           <div class="modal-field">
             <label for="input">Mã bộ phận sử dụng <span>*</span></label>
 
-            <MISACombobox
+            <BaseCombobox
               :required="true"
               :maxlength="50"
               :name="'Mã bộ phận sử dụng'"
@@ -47,7 +47,7 @@
               :optionList="departmentData"
               filterby="DepartmentCode"
               v-model="asset.DepartmentCode"
-            ></MISACombobox>
+            ></BaseCombobox>
           </div>
           <div class="modal-field modal-field-long">
             <label for="input">Tên bộ phận sử dụng</label>
@@ -58,7 +58,7 @@
         <div class="modal-row">
           <div class="modal-field">
             <label for="input">Mã loại tài sản <span>*</span></label>
-            <MISACombobox
+            <BaseCombobox
               :maxlength="50"
               required="true"
               :optionList="categoryData"
@@ -68,7 +68,7 @@
               placeholder="Chọm mã loại tài sản"
               @selectItem="autoFieldCombobox"
               v-model="asset.FixedAssetCategoryCode"
-            ></MISACombobox>
+            ></BaseCombobox>
           </div>
           <div class="modal-field modal-field-long">
             <label for="input">Tên loại tài sản</label>
