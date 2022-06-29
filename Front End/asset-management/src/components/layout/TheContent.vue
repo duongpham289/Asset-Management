@@ -169,28 +169,70 @@
 import axios from 'axios';
 export default {
   async beforeMount() {
+    this.pageSize = 20;
+    // Lấy dữ liệu đã phân trang từ api
+    await this.filterAsset();
+
+    // Lấy tổng số bản ghi:
     await this.getAssetData();
   },
+
+  computed: {
+    // Tính tổng số trang
+    totalPageIndex: function () {
+      return Math.ceil(this.assetLength / this.pageSize);
+    },
+  },
+
   methods: {
+    // Lấy tổng bản ghi:
     async getAssetData() {
       // this.isLoading = true;
       try {
         const res = await axios.get(
           'https://62616774327d3896e27b58d2.mockapi.io/api/asset'
         );
-        console.log(res.data);
-        this.assetData = res.data;
-        // this.totalAssetListLength = res.data.length;
-        // console.log(this.totalAssetListLength);
-        // this.isLoading = false;
+        this.totalAssetListLength = res.data.length;
       } catch (error) {
         console.log(error);
+      }
+    },
+
+    // Lấy danh sách đã phân trang
+    async filterAsset() {
+      this.isLoading = true;
+      try {
+        const res = await axios.get(
+          'http://localhost:5290/api/v1/FixedAssets/Filter',
+          {
+            params: {
+              FixedAssetFilter: this.searchBox,
+              FixedAssetCategoryName: this.searchCategory,
+              DepartmentName: this.searchDepartment,
+              pageIndex: this.pageIndex,
+              pageSize: this.pageSize,
+            },
+          }
+        );
+        this.assetData = res.data.FilterList;
+        this.assetLength = res.data.FilterCount;
+        this.isLoading = false;
+      } catch (error) {
+        this.isLostConnection = true;
+        this.isLoading = false;
       }
     },
   },
   data() {
     return {
       assetData: {},
+      totalAssetListLength: 0,
+      assetLength: null,
+      searchCategory: null,
+      searchDepartment: null,
+      searchBox: null,
+      pageIndex: null,
+      pageSize: null,
     };
   },
 };

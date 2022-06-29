@@ -217,20 +217,20 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import {
-  cancel_msg,
-  error_msg,
-  toast_msg,
-} from "../../assets/resource/ResourceMsg";
+// import axios from 'axios';
+// import {
+//   cancel_msg,
+//   error_msg,
+//   toast_msg,
+// } from "../../assets/resource/ResourceMsg";
 export default {
-  name: "base-dialog",
+  name: 'base-dialog',
   props: [
-    "assetSelected",
-    "dialogTitle",
-    "isEditing",
-    "departmentData",
-    "categoryData",
+    'assetSelected',
+    'dialogTitle',
+    'isEditing',
+    'departmentData',
+    'categoryData',
   ],
 
   beforeMount() {
@@ -260,7 +260,7 @@ export default {
         return this.formatSalary(this.asset.DepreciationValue.toString());
       },
       set(newValue) {
-        newValue = newValue.replaceAll(".", "");
+        newValue = newValue.replaceAll('.', '');
         this.asset.DepreciationValue = newValue;
       },
     },
@@ -276,7 +276,7 @@ export default {
         return this.formatSalary(this.asset.Cost.toString());
       },
       set(newValue) {
-        newValue = newValue.replaceAll(".", "");
+        newValue = newValue.replaceAll('.', '');
         this.asset.Cost = newValue;
         // Tính giá trị hao mòn năm
         this.asset.DepreciationValue = Math.floor(
@@ -304,7 +304,7 @@ export default {
   },
 
   watch: {
-    "this.asset.PurchaseDate"(newValue) {
+    'this.asset.PurchaseDate'(newValue) {
       console.log(newValue);
     },
     /**
@@ -313,14 +313,14 @@ export default {
      * @return
      * Created by: Bùi Đức Anh
      */
-    "asset.FixedAssetCategoryCode"(newValue) {
+    'asset.FixedAssetCategoryCode'(newValue) {
       var data = this.categoryData.find(
         (item) => item.FixedAssetCategoryCode == newValue
       );
       if (!data) {
-        this.asset.FixedAssetCategoryName = "";
-        this.asset.DepreciationRate = "";
-        this.asset.LifeTime = "";
+        this.asset.FixedAssetCategoryName = '';
+        this.asset.DepreciationRate = '';
+        this.asset.LifeTime = '';
       }
     },
     /**
@@ -329,14 +329,14 @@ export default {
      * @return
      * Created by: Bùi Đức Anh
      */
-    "asset.DepartmentCode"(newValue) {
+    'asset.DepartmentCode'(newValue) {
       var data = this.departmentData.find(
         (item) => item.DepartmentCode == newValue
       );
       if (data) {
         this.asset.DepartmentName = data.DepartmentName;
       } else {
-        this.asset.DepartmentName = "";
+        this.asset.DepartmentName = '';
       }
     },
   },
@@ -349,7 +349,7 @@ export default {
      * Created by: Bùi Đức Anh
      */
     formatSalary(value) {
-      var format = `${value.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+      var format = `${value.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
       return format;
     },
 

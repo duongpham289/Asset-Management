@@ -23,12 +23,13 @@
   </div>
 </template>
 <script>
-import Datepicker from "@vuepic/vue-datepicker";
+import Datepicker from '@vuepic/vue-datepicker';
 
 export default {
+  name: 'date-picker',
   components: { Datepicker },
 
-  props: ["modelValue", "name", "required"],
+  props: ['modelValue', 'name', 'required'],
 
   // beforeMount() {
   //   this.date = this.modelValue;
@@ -43,7 +44,7 @@ export default {
      */
     async handleDate(value) {
       this.date = value;
-      await this.$emit("update:modelValue", this.date);
+      await this.$emit('update:modelValue', this.date);
     },
 
     /**
@@ -54,7 +55,7 @@ export default {
      * Created date: 01:12 31/05/2022
      */
     setFocus() {
-      this.inputClassName = "m-input-focus";
+      this.inputClassName = 'm-input-focus';
     },
 
     /**
@@ -65,7 +66,7 @@ export default {
      * Created date: 01:12 31/05/2022
      */
     setBlur() {
-      this.inputClassName = "";
+      this.inputClassName = '';
       this.validateRequired();
     },
 
@@ -77,10 +78,10 @@ export default {
      * Created date: 01:12 31/05/2022
      */
     validateRequired() {
-      if (this.required == true && (this.date == null || this.date == "")) {
-        this.inputClassName = "m-input-error";
+      if (this.required == true && (this.date == null || this.date == '')) {
+        this.inputClassName = 'm-input-error';
       } else {
-        this.inputClassName = "";
+        this.inputClassName = '';
       }
     },
   },
