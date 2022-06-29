@@ -12,7 +12,7 @@ app.component('BaseButton', Button);
 app.component('BaseCheckbox', Checkbox);
 app.component('BaseDialog', Dialog);
 app.component('BaseInput', Input);
-app.component('Datepicker', Datepicker);
+app.component('DatePicker', Datepicker);
 app.component('BaseCombobox', Combobox);
 
 app.mount('#app');

@@ -45,3 +45,14 @@ body {
 .m-main {
   width: calc(100% - 225px);
 }
+
+.text-align-left {
+  text-align: left;
+  padding-right: 5px;
+}
+.text-align-right {
+  text-align: right;
+}
+.text-align-center {
+  text-align: center;
+}
