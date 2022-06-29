@@ -390,6 +390,144 @@ export default {
         this.asset.DepreciationRate *
         this.asset.ProductionYear;
     },
+    /**
+     * Mô tả : Thêm asset mới
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    async onCreateAsset() {
+      // Tính những giá trị cần lưu lên db
+      this.autoFieldData();
+      // Gửi dữ liệu lên api
+      try {
+        const res = await axios.post("FixedAssets", this.asset);
+        this.$emit("alertShow", false);
+        this.$emit("dialogShow", false);
+        if (res.statusText == "Created") {
+          // Cập nhật lại bảng
+          this.$emit("filterAsset");
+          // Cập nhật lại tổng bản ghi
+          this.$emit("getAssetData");
+          // Hiên thị toast thành công
+          this.$emit("toastShow", toast_msg.CREATE_SUCCESS);
+        }
+      } catch (error) {
+        this.$emit("alertShow", true, error.response.data.data.data[0]);
+      }
+    },
+
+    /**
+     * Mô tả : Sửa asset
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    async onUpdateAsset() {
+      // Tính những giá trị cần lưu lên db
+      this.autoFieldData();
+      // Gửi dữ liệu lên api
+      try {
+        const res = await axios.put(
+          `FixedAssets/${this.asset.FixedAssetId}`,
+          this.asset
+        );
+        this.$emit("alertShow", false);
+        this.$emit("dialogShow", false);
+        if (res.statusText == "OK") {
+          // Cập nhật lại bảng:
+          this.$emit("filterAsset");
+          // Cập nhật lại tổng bản ghi
+          this.$emit("getAssetData");
+          // Hiển thị thông báo thành công:
+          this.$emit("toastShow", toast_msg.SAVE_SUCESS);
+        }
+      } catch (error) {
+        console.log(error.response);
+        this.$emit("alertShow", true, error.response.data.data.data[0]);
+      }
+    },
+
+    /**
+     * Mô tả : Ấn nút hủy, hiển thị thông báo
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    onCancel() {
+      // Kiểm tra sự thay đổi trong các ô input:
+      // Nếu không có hiển thị thông báo đóng:
+      if (JSON.stringify(this.assetCopy) === JSON.stringify(this.asset)) {
+        this.$emit("alertShow", true, cancel_msg.CANCEL, "cancel");
+      } else {
+        // Nếu có sự thay đổi hiển thị cảnh báo báo:
+        this.$emit("alertShow", true, cancel_msg.CANCEL_CHANGE, "cancelChange");
+      }
+    },
+
+    /**
+     * Mô tả : Validate dữ liệu
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    onSubmit() {
+      // Gắn lại giá trị cho erorr list về rỗng
+      this.errorList = [];
+      var first = true;
+
+      // 1. Validate input rỗng:
+      var form = this.$refs.form;
+      // Vòng lặp trong form để lấy các input
+      Array.from(form.elements).forEach((element) => {
+        // Kiểm tra giá trị của input
+        if (element.required && element.value.trim() == "") {
+          if (first) {
+            first = false;
+            this.firstEmptyElement = element;
+            console.log(this.firstEmptyElement);
+          }
+          element.classList.add("m-input-error");
+          this.errorList.push(`${error_msg.EMPTY_VALUE}${element.name}`);
+        }
+      });
+
+      // 2. Validate nghiệp vụ:
+      // 2.1 Tỉ lệ hao mòn khác 1/số năm sử dụng:
+      if (this.asset.LifeTime == 0 && this.asset.DepreciationRate != 0) {
+        this.errorList.push("Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng");
+      } else if (
+        this.asset.LifeTime != 0 &&
+        this.asset.DepreciationRate !=
+          Number((1 / this.asset.LifeTime).toFixed(4))
+      ) {
+        this.errorList.push("Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng");
+      }
+
+      // 2.2 Hao mòn năm nhỏ hơn nguyên giá:
+      if (Number(this.asset.DepreciationValue) > Number(this.asset.Cost)) {
+        this.errorList.push("Hao mòn năm phải nhỏ hơn hoặc bằng nguyên giá");
+      }
+
+      // console.log(Object.entries(this.$refs));
+
+      // 3. Nếu không có lỗi gì thì thực hiện thêm hoặc sửa
+      if (this.errorList.length != 0) {
+        this.$emit("alertShow", true, this.errorList[0]);
+      } else {
+        this.isEditing ? this.onUpdateAsset() : this.onCreateAsset();
+      }
+    },
+
+    /**
+     * Mô tả : setFocus vào element đầu tiên
+     * @param
+     * @return
+     * Created by: Bùi Đức Anh
+     */
+    setFocusEmpty() {
+      this.firstEmptyElement.focus();
+    },
   },
   data() {
     return {
