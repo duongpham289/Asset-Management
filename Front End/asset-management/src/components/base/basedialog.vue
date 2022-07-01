@@ -217,12 +217,12 @@
   </div>
 </template>
 <script>
-// import axios from 'axios';
-// import {
-//   cancel_msg,
-//   error_msg,
-//   toast_msg,
-// } from "../../assets/resource/ResourceMsg";
+import axios from 'axios';
+import {
+  cancel_msg,
+  error_msg,
+  toast_msg,
+} from "../../assets/resource/ResourceMsg";
 export default {
   name: 'base-dialog',
   props: [

@@ -149,9 +149,9 @@
                     Tổng số:
                     <strong>{{ this.totalAssetListLength }}</strong> bản ghi
                   </div>
-                  <!-- <MISADropdown @onChose="getPageSize"></MISADropdown>
+                  <BaseDropdown @onChose="getPageSize"></BaseDropdown>
 
-                  <MISAPaginate
+                  <BasePaginate
                     v-model="pageIndex"
                     :pageCount="totalPageIndex"
                     :prev-text="'pre'"
@@ -161,7 +161,7 @@
                     :container-class="'m-paging-list'"
                     :prev-class="'prev-class'"
                     :click-handler="getPageIndex"
-                  ></MISAPaginate> -->
+                  ></BasePaginate>
                 </div>
               </td>
               <td class="text-align-right w-60">
@@ -228,6 +228,20 @@ export default {
   },
 
   methods: {
+    // gán dữ liệu pageSize từ dropdown
+    async getPageSize(option) {
+      this.pageSize = option;
+      this.pageIndex = 1;
+      await this.filterAsset();
+    },
+
+    // Lấy thông tin trang từ paging
+    async getPageIndex(pageNum) {
+      this.pageIndex = pageNum;
+      // thực hiện filter theo pageIndex
+      await this.filterAsset();
+    },
+
     // Lấy tổng bản ghi:
     async getAssetData() {
       // this.isLoading = true;

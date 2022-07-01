@@ -1,0 +1,76 @@
+.m-dropdown {
+  width: 59px;
+  height: 25px;
+  border-radius: 2.625px;
+  border: 1px solid #afafaf;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin: 0px 30px 0 10px;
+}
+
+.m-dropdown-main {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+.dropdown-title {
+  width: calc(100% - 25px);
+  text-align: right;
+}
+.dropdown-icon {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.m-dropdown-option {
+  max-height: 100px;
+  position: fixed;
+  overflow: auto;
+  border-radius: 2.5px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  z-index: 5;
+  margin-bottom: 2px;
+}
+
+.option-item {
+  cursor: pointer;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option-item:hover {
+  background-color: #c7e0f5;
+}
+
+.option-item-seleced {
+  background-color: #96c6ee;
+}
+
+.m-dropdown-option::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+.m-dropdown-option::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+.m-dropdown-option::-webkit-scrollbar-thumb {
+  background: #afafaf;
+  border-radius: 1px;
+  border-radius: 1000px;
+}
+
+.m-dropdown-option::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
