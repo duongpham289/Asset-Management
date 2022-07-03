@@ -72,8 +72,8 @@
             Không có dữ liệu
           </div> -->
           <tbody>
-            <!-- @dblclick="showEditDialog(asset)" -->
             <tr
+              @dblclick="showEditDialog(asset)"
               v-for="(asset, index) in assetData"
               :key="index"
               :class="[{ 'm-tr-seleced': asset.checked }, 'm-tr']"
@@ -182,6 +182,19 @@
         </table>
       </div>
     </div>
+
+    <BaseDialog
+      ref="dialog"
+      :dialogTitle="isEditing ? 'Sửa sản phẩm' : 'Thêm sản phẩm'"
+      :isEditing="isEditing"
+      v-if="isDialogShow"
+      :assetSelected="assetSelected"
+      :departmentData="departmentData"
+      :categoryData="categoryData"
+      @filterAsset="filterAsset"
+      @getAssetData="getAssetData"
+      @dialogShow="dialogShow"
+    ></BaseDialog>
   </div>
 </template>
 <script>
@@ -194,6 +207,25 @@ export default {
 
     // Lấy tổng số bản ghi:
     await this.getAssetData();
+
+    //Lấy dữ liệu Department
+
+    try {
+      const res = await axios.get('http://localhost:5290/api/v1/Departments');
+      this.departmentData = res.data;
+    } catch (error) {
+      console.log(error);
+    }
+
+    // Lấy dữ liệu Category
+    try {
+      const res = await axios.get(
+        'http://localhost:5290/api/v1/FixedAssetCategories'
+      );
+      this.categoryData = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   computed: {
@@ -228,9 +260,34 @@ export default {
   },
 
   methods: {
+<<<<<<< HEAD
     exportToExcelOnClick(){
       console.log("Export data to excel");
     },
+=======
+    // Hiển thị dialog
+    async showEditDialog(asset) {
+      // clearTimeout(this.clickTimeout);
+      this.isEditing = true;
+      await this.getAssetById(asset.FixedAssetId);
+      //Hiểm thị form
+      this.dialogShow(true);
+    },
+
+    // Lấy dữ liệu theo id
+    async getAssetById(assetId) {
+      this.isDialogLoading = true;
+      try {
+        const res = await axios.get(
+          `http://localhost:5290/api/v1/FixedAssets/${assetId}`
+        );
+        this.assetSelected = res.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+>>>>>>> 7c7314520bcf81791d940bd3abb070061b4983b6
     // gán dữ liệu pageSize từ dropdown
     async getPageSize(option) {
       this.pageSize = option;
@@ -289,8 +346,7 @@ export default {
     onRowClick(asset, $event) {
       //Nếu ấn vào edit
       if ($event.target.classList.contains('edit')) {
-        console.log('first');
-        // this.showEditDialog(asset);
+        this.showEditDialog(asset);
       }
       // Nếu ấn vào copy
       else if ($event.target.classList.contains('copy')) {
@@ -317,9 +373,16 @@ export default {
       var format = `${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
       return format;
     },
+
+    dialogShow(isShow) {
+      this.isDialogShow = isShow;
+    },
   },
   data() {
     return {
+      departmentData: [],
+      categoryData: [],
+      isDialogShow: false,
       assetData: [],
       totalAssetListLength: 0,
       assetLength: null,
