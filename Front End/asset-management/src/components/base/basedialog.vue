@@ -1,7 +1,7 @@
 <template>
-  <div class="m-dialog" v-shortkey="['ctrl', 's']" @shortkey="onSubmit()">
+  <div class="m-dialog">
     <div class="m-modal">
-      <div class="m-nodal-title">{{ dialogTitle }}</div>
+      <div class="m-modal-title">{{ dialogTitle }}</div>
       <div class="m-modal-close" @click="onCancel">
         <div class="close"></div>
       </div>
@@ -222,7 +222,7 @@ import {
   cancel_msg,
   error_msg,
   toast_msg,
-} from "../../assets/resource/ResourceMsg";
+} from '../../assets/resource/ResourceMsg';
 export default {
   name: 'base-dialog',
   props: [
@@ -401,19 +401,19 @@ export default {
       this.autoFieldData();
       // Gửi dữ liệu lên api
       try {
-        const res = await axios.post("FixedAssets", this.asset);
-        this.$emit("alertShow", false);
-        this.$emit("dialogShow", false);
-        if (res.statusText == "Created") {
+        const res = await axios.post('FixedAssets', this.asset);
+        this.$emit('alertShow', false);
+        this.$emit('dialogShow', false);
+        if (res.statusText == 'Created') {
           // Cập nhật lại bảng
-          this.$emit("filterAsset");
+          this.$emit('filterAsset');
           // Cập nhật lại tổng bản ghi
-          this.$emit("getAssetData");
+          this.$emit('getAssetData');
           // Hiên thị toast thành công
-          this.$emit("toastShow", toast_msg.CREATE_SUCCESS);
+          this.$emit('toastShow', toast_msg.CREATE_SUCCESS);
         }
       } catch (error) {
-        this.$emit("alertShow", true, error.response.data.data.data[0]);
+        this.$emit('alertShow', true, error.response.data.data.data[0]);
       }
     },
 
@@ -432,19 +432,19 @@ export default {
           `FixedAssets/${this.asset.FixedAssetId}`,
           this.asset
         );
-        this.$emit("alertShow", false);
-        this.$emit("dialogShow", false);
-        if (res.statusText == "OK") {
+        this.$emit('alertShow', false);
+        this.$emit('dialogShow', false);
+        if (res.statusText == 'OK') {
           // Cập nhật lại bảng:
-          this.$emit("filterAsset");
+          this.$emit('filterAsset');
           // Cập nhật lại tổng bản ghi
-          this.$emit("getAssetData");
+          this.$emit('getAssetData');
           // Hiển thị thông báo thành công:
-          this.$emit("toastShow", toast_msg.SAVE_SUCESS);
+          this.$emit('toastShow', toast_msg.SAVE_SUCESS);
         }
       } catch (error) {
         console.log(error.response);
-        this.$emit("alertShow", true, error.response.data.data.data[0]);
+        this.$emit('alertShow', true, error.response.data.data.data[0]);
       }
     },
 
@@ -458,10 +458,10 @@ export default {
       // Kiểm tra sự thay đổi trong các ô input:
       // Nếu không có hiển thị thông báo đóng:
       if (JSON.stringify(this.assetCopy) === JSON.stringify(this.asset)) {
-        this.$emit("alertShow", true, cancel_msg.CANCEL, "cancel");
+        this.$emit('alertShow', true, cancel_msg.CANCEL, 'cancel');
       } else {
         // Nếu có sự thay đổi hiển thị cảnh báo báo:
-        this.$emit("alertShow", true, cancel_msg.CANCEL_CHANGE, "cancelChange");
+        this.$emit('alertShow', true, cancel_msg.CANCEL_CHANGE, 'cancelChange');
       }
     },
 
@@ -481,13 +481,13 @@ export default {
       // Vòng lặp trong form để lấy các input
       Array.from(form.elements).forEach((element) => {
         // Kiểm tra giá trị của input
-        if (element.required && element.value.trim() == "") {
+        if (element.required && element.value.trim() == '') {
           if (first) {
             first = false;
             this.firstEmptyElement = element;
             console.log(this.firstEmptyElement);
           }
-          element.classList.add("m-input-error");
+          element.classList.add('m-input-error');
           this.errorList.push(`${error_msg.EMPTY_VALUE}${element.name}`);
         }
       });
@@ -495,25 +495,25 @@ export default {
       // 2. Validate nghiệp vụ:
       // 2.1 Tỉ lệ hao mòn khác 1/số năm sử dụng:
       if (this.asset.LifeTime == 0 && this.asset.DepreciationRate != 0) {
-        this.errorList.push("Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng");
+        this.errorList.push('Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng');
       } else if (
         this.asset.LifeTime != 0 &&
         this.asset.DepreciationRate !=
           Number((1 / this.asset.LifeTime).toFixed(4))
       ) {
-        this.errorList.push("Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng");
+        this.errorList.push('Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng');
       }
 
       // 2.2 Hao mòn năm nhỏ hơn nguyên giá:
       if (Number(this.asset.DepreciationValue) > Number(this.asset.Cost)) {
-        this.errorList.push("Hao mòn năm phải nhỏ hơn hoặc bằng nguyên giá");
+        this.errorList.push('Hao mòn năm phải nhỏ hơn hoặc bằng nguyên giá');
       }
 
       // console.log(Object.entries(this.$refs));
 
       // 3. Nếu không có lỗi gì thì thực hiện thêm hoặc sửa
       if (this.errorList.length != 0) {
-        this.$emit("alertShow", true, this.errorList[0]);
+        this.$emit('alertShow', true, this.errorList[0]);
       } else {
         this.isEditing ? this.onUpdateAsset() : this.onCreateAsset();
       }
