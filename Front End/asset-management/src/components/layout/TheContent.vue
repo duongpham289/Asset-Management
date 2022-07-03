@@ -28,7 +28,7 @@
           style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16)"
           buttonTitle="+Thêm tài sản"
         ></BaseButton>
-        <div class="toolbar-btn icon-box">
+        <div class="toolbar-btn icon-box" @click="exportToExcelOnClick">
           <div class="excel"></div>
         </div>
         <div class="toolbar-btn icon-box">
@@ -228,6 +228,9 @@ export default {
   },
 
   methods: {
+    exportToExcelOnClick(){
+      console.log("Export data to excel");
+    },
     // gán dữ liệu pageSize từ dropdown
     async getPageSize(option) {
       this.pageSize = option;
