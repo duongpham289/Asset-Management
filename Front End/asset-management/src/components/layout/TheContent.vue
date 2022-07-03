@@ -260,11 +260,6 @@ export default {
   },
 
   methods: {
-<<<<<<< HEAD
-    exportToExcelOnClick(){
-      console.log("Export data to excel");
-    },
-=======
     // Hiển thị dialog
     async showEditDialog(asset) {
       // clearTimeout(this.clickTimeout);
@@ -287,7 +282,6 @@ export default {
       }
     },
 
->>>>>>> 7c7314520bcf81791d940bd3abb070061b4983b6
     // gán dữ liệu pageSize từ dropdown
     async getPageSize(option) {
       this.pageSize = option;
