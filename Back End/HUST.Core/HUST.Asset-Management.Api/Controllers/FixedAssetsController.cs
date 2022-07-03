@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HUST.Asset_Management.Api.Controllers
 {
-   
+
     public class FixedAssetsController : HUSTBaseController<FixedAsset>
     {
         IFixedAssetRepository _fixedAssetRepository;
@@ -16,6 +16,50 @@ namespace HUST.Asset_Management.Api.Controllers
         {
             _fixedAssetRepository = fixedAssetRepository;
             _fixedAssetService = fixedAssetService;
+        }
+
+        /// <summary>
+        /// Xuất khẩu ra file excel
+        /// </summary>
+        /// <returns>Số bản ghi được xuất khẩu ra file excel</returns>
+        [HttpPost("Excel")]
+        public IActionResult ExportExcel([FromBody] List<FixedAsset>? fixedAssets)
+        {
+            try
+            {
+                var list = new List<FixedAsset>();
+                //Kiểm tra điều kiện danh sách Nguyên vật liệu muốn xuất file Excel(khác null)
+                if (fixedAssets.Count() > 0)
+                {
+                    list = fixedAssets.ToList();
+                }
+                else
+                {
+                    // query data from database  
+                    Task.Yield();
+                    //Lấy danh sách nguyên vật liệu dưới DB
+                    list = (List<FixedAsset>)_fixedAssetRepository.Get();
+                }
+
+                //Setup những trường sẽ được sẽ được xuất khẩu: 
+                var _objectForExport = new ObjectForExport();
+
+                var stream = new MemoryStream();
+
+                //Khai báo thông tin file excel
+                string excelName = $"Tai-san-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+
+                //config file excel
+                _objectForExport = _fixedAssetService.ConfigFileToExport(list, stream, excelName);
+
+                //trả về file excel
+                return File(stream, "application/octet-stream", _objectForExport.excelName);
+            }
+            catch (Exception ex)
+            {
+
+                return HandleException(ex);
+            }
         }
 
         /// <summary>

@@ -11,5 +11,6 @@ namespace HUST.Core.Interfaces.Services
 {
     public interface IFixedAssetService : IBaseService<FixedAsset>
     {
+        ObjectForExport ConfigFileToExport(List<FixedAsset> list, MemoryStream stream, string excelName);
     }
 }
