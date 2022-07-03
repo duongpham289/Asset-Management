@@ -1,6 +1,7 @@
 ﻿using HUST.Core.Interfaces.Respositories;
 using HUST.Core.Interfaces.Services;
 using HUST.Core.Services;
+using HUST.Infrastructor.Library;
 using HUST.Infrastructor.Repository;
 using Newtonsoft.Json.Serialization;
 
@@ -43,6 +44,7 @@ builder.Services.AddScoped<IFixedAssetRepository, FixedAssetRepository>();
 builder.Services.AddScoped<IFixedAssetService, FixedAssetService>();
 builder.Services.AddScoped<IFixedAssetCategoryRepository, FixedAssetCategoryRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IEPPLusAppService, EPPLusAppService>();
 
 
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

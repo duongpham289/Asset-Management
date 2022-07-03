@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nQ3oxzlwsBr5KnjxFRtIrRySSs1iR2Fp8QC18Wh+DyHIL6IrUai5QHOr5CB3I/jrBfQy1ImOJyhGL02dZ2CiBw==",
+  "dgSpecHash": "uWuUKXw2zCibue4iXjDbiw+H7xlA5i1IeUHNJCECo53jvdS7SeP9ltragvbYAY387S7RuMzl//UyS5ea9ndg8w==",
   "success": true,
   "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\fixedassets\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\HUST.Asset-Management.Api.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\epplus\\6.0.5\\epplus.6.0.5.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\epplus.interfaces\\6.0.0\\epplus.interfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\epplus.system.drawing\\6.0.0\\epplus.system.drawing.6.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.http.features\\6.0.0-preview.4.21253.5\\microsoft.aspnetcore.http.features.6.0.0-preview.4.21253.5.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.6\\microsoft.aspnetcore.jsonpatch.6.0.6.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.6\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.6.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -33,6 +34,7 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.formats.asn1\\5.0.0\\system.formats.asn1.5.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\system.io.pipelines\\6.0.0-preview.4.21253.7\\system.io.pipelines.6.0.0-preview.4.21253.7.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.security.cryptography.cng\\5.0.0\\system.security.cryptography.cng.5.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.security.cryptography.pkcs\\5.0.0\\system.security.cryptography.pkcs.5.0.0.nupkg.sha512",

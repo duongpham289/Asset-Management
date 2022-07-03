@@ -19,6 +19,25 @@ namespace HUST.Asset_Management.Api.Controllers
         }
 
         /// <summary>
+        /// Nhập khẩu tài sản từ file excel
+        /// </summary>
+        /// <param name="formFile">File Excel chứa dữ liệu nhập khẩu tài sản</param>
+        /// <returns>Danh sách nhập khẩu tài sản từ file excel</returns>
+        [HttpPost("ImportingExcel")]
+        public IActionResult ImportFromExcels(IFormFile formFile)
+        {
+            try
+            {
+                var res = _fixedAssetService.Import(formFile);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+
+        /// <summary>
         /// Xuất khẩu ra file excel
         /// </summary>
         /// <returns>Số bản ghi được xuất khẩu ra file excel</returns>
