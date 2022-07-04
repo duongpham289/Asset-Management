@@ -28,6 +28,9 @@
           style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16)"
           buttonTitle="+Thêm tài sản"
         ></BaseButton>
+        <div class="toolbar-btn icon-box" @click="importFromExcelOnClick">
+          <div class=""></div>
+        </div>
         <div class="toolbar-btn icon-box" @click="exportToExcelOnClick">
           <div class="excel"></div>
         </div>
