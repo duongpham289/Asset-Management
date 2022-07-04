@@ -260,6 +260,36 @@ export default {
   },
 
   methods: {
+  async  exportToExcelOnClick(dataExportExcel){
+        // Nếu không chứa -> Xuất toàn bộ nguyên vật liệu có trong Database
+        dataExportExcel=[];
+        await this.handleExport(dataExportExcel);
+    },
+    
+    async handleExport(dataExportExcel) {
+      const tempDateTime = new Date();
+      const fileName = `Tai-san${tempDateTime.getTime()}.xlsx`;
+      await axios
+        .post("http://localhost:5290/api/v1/FixedAssets/Excel", dataExportExcel, {
+          responseType: "blob",
+          contentType: "application/json-patch+json",
+        })
+        .then(function (res) {
+          if (res) {
+            var url = window.URL.createObjectURL(new Blob([res.data]));
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a); 
+            a.click();
+            a.remove(); 
+          }
+        })
+        .catch(function (res) {
+          console.log(res);
+        });
+    },
+
     // Hiển thị dialog
     async showEditDialog(asset) {
       // clearTimeout(this.clickTimeout);

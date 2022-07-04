@@ -977,19 +977,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\BK-documents\\PMPT\\BTL\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\fixedassets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
       "projectName": "HUST.Core",
-      "projectPath": "E:\\BK-documents\\PMPT\\BTL\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\BK-documents\\PMPT\\BTL\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\obj\\",
+      "projectPath": "C:\\Users\\ADMIN\\Desktop\\fixedassets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ADMIN\\Desktop\\fixedassets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1047,7 +1047,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
