@@ -84,12 +84,8 @@
           <div class="m-popup-title-content-second">
             <div class="m-popup-title-content">Bước 2: Kiểm tra dữ liệu</div>
             <div class="m-popup-title-content-right">
-              <div class="m-valid-row-preview">
-                Hợp lệ: <span>{{ isValidObject }}</span>
-              </div>
-              <div class="m-inValid-row-preview">
-                Không hợp lệ: <span>{{ isInValidObject }}</span>
-              </div>
+              <div class="m-valid-row-preview"></div>
+              <div class="m-inValid-row-preview"></div>
             </div>
           </div>
           <div class="frame-import-table">
@@ -120,7 +116,7 @@
                         <td class="">
                           <input
                             @input="changeValue(material.FixedAssetCode, index)"
-                            ref="MaterialCode"
+                            :id="`FixedAssetCode-${index}`"
                             v-model="material.FixedAssetCode"
                             class="width-100"
                           />
@@ -128,7 +124,7 @@
                         <td class="">
                           <input
                             @input="changeValue(material.FixedAssetName, index)"
-                            ref="MaterialName"
+                            :id="`FixedAssetName-${index}`"
                             v-model="material.FixedAssetName"
                             class="width-100"
                           />
@@ -136,6 +132,7 @@
                         <td class="">
                           <input
                             @input="changeValue(material.DepartmentCode, index)"
+                            :id="`DepartmentCode-${index}`"
                             v-model="material.DepartmentCode"
                             class="width-100"
                           />
@@ -143,7 +140,7 @@
                         <td class="">
                           <input
                             @input="changeValue(material.DepartmentName, index)"
-                            ref="UnitName"
+                            :id="`DepartmentName-${index}`"
                             v-model="material.DepartmentName"
                             class="width-100"
                           />
@@ -157,7 +154,7 @@
                                 index
                               )
                             "
-                            ref="UnitName"
+                            :id="`FixedAssetCategoryCode-${index}`"
                             v-model="material.FixedAssetCategoryCode"
                             class="width-100"
                           />
@@ -171,17 +168,12 @@
                                 index
                               )
                             "
-                            ref="UnitName"
+                            :id="`FixedAssetCategoryName-${index}`"
                             v-model="material.FixedAssetCategoryName"
                             class="width-100"
                           />
                         </td>
 
-                        <td class="">
-                          <div class="reason-error txt-error-table">
-                            {{ this.listErrValidate[index] }}
-                          </div>
-                        </td>
                         <td @click="deleteObjectInPreview(index)">X</td>
                       </tr>
                     </tbody>
@@ -269,35 +261,9 @@ export default {
   },
   props: [],
   methods: {
-    /**
-     * Mô tả : test input
-     * Created by: Vũ Trọng Nghĩa - MF1108
-     * Created date: 14:48 02/06/2022
-     */
-    changeValue(value, index) {
-      this.listErrValidate[index] = null;
-      if (!value) {
-        this.validateDataFromClient(this.materialsToImport);
-      }
-    },
-    /**
-     * Mô tả : Lọc dữ liệu, trả về số bản ghi hợp lệ và không hợp lệ
-     * Created by: Vũ Trọng Nghĩa - MF1108
-     * Created date: 10:49 02/06/2022
-     */
-    checkNumberOfValidObj() {
-      this.isValidObject = 0;
-      this.isInValidObject = 0;
-      //Lọc dữ liệu và hiển thị số dòng hợp lệ và không hợp lệ
-      for (const data of this.materialsToImport) {
-        if (data.IsValid == true) {
-          // Thêm vào tổng số dòng hợp lệ
-          this.isValidObject++;
-        } else {
-          // Thêm vào tổng số dòng không hợp lệ
-          this.isInValidObject++;
-        }
-      }
+    saveMaterialsFromExcel() {
+      //Validate Data
+      this.validateDataFromClient(this.materialsToImport);
     },
     /**
      * Mô tả : xóa dòng trong bảng preview
@@ -309,39 +275,8 @@ export default {
       this.materialsToImport.splice(index, 1);
       //Validate Data
       this.validateDataFromClient(this.materialsToImport);
-      //check số lượng bản ghi hợp lệ
-      this.checkNumberOfValidObj();
     },
-    /**
-     * Mô tả : Thực hiện validate nguyên vật liệu
-     * @param: Mảng dữ liệu của danh sách materials được import từ file excel
-     * Created by: Vũ Trọng Nghĩa - MF1108
-     * Created date: 09:46 31/05/2022
-     */
-    // validateMaterialsFormServer(arrayMaterials) {
-    //   debugger;
-    //   // Clear set error của refs
-    //   this.clearErrorData();
-    //   if (arrayMaterials.length > 0) {
-    //     for (let index = 0; index < arrayMaterials.length; index++) {
-    //       //Hứng đối tượng từ mảng dữ liệu
-    //       let tempMaterial = arrayMaterials[index];
-    //       let keyErrs = Object.keys(tempMaterial?.ErrorValidateNotValid);
-    //       let object = tempMaterial.ErrorValidateNotValid;
-    //       for (const key of keyErrs) {
-    //         if (
-    //           tempMaterial.IsValid == false &&
-    //           tempMaterial.ErrorValidateNotValid[key]
-    //         )
-    //           // focus vào ô lỗi
-    //           this.$refs[key][index].setError();
-    //         // Hiển thị thông tin lỗi
-    //         this.listErrValidate[index] = object[key];
-    //         //
-    //       }
-    //     }
-    //   }
-    // },
+
     /**
      * Mô tả : Clear Error By using ref
      * Created by: Vũ Trọng Nghĩa - MF1108
@@ -349,12 +284,6 @@ export default {
      */
     clearErrorData() {
       this.listErrValidate = [];
-      let tempRefs = Object.keys(this.$refs);
-      for (const key of tempRefs) {
-        for (let index = 0; index < this.$refs[key].length; index++) {
-          this.$refs[key][index].removeError();
-        }
-      }
     },
 
     /**
@@ -371,49 +300,67 @@ export default {
       for (let index = 0; index < clientDatas.length; index++) {
         const data = clientDatas[index];
         // Check NULL
-        if (!data.MaterialCode) {
+        if (!data.FixedAssetCode) {
           //Focus vào ô bị lỗi
-          this.$nextTick(() => {
-            this.$refs.MaterialCode[index].setError();
-          });
+          const errorInputFixedAssetCode = document.getElementById(
+            `FixedAssetCode-${index}`
+          ).style;
+          errorInputFixedAssetCode.border = "1px solid red";
+          //Hiển thị lỗi trả về
+          this.listErrValidate[index] = "Mã tài sản không được phép để trống";
+          this.isValidForInsert = false;
+        }
+        if (!data.FixedAssetName) {
+          //Focus vào ô bị lỗi
+          const errorInputFixedAssetName = document.getElementById(
+            `FixedAssetName-${index}`
+          ).style;
+          errorInputFixedAssetName.border = "1px solid red";
+          //Hiển thị lỗi trả về
+          this.listErrValidate[index] = "Tên tài sản không được phép để trống";
+          this.isValidForInsert = false;
+        }
+        if (!data.DepartmentCode) {
+          //Focus vào ô bị lỗi
+          const errorInputDepartmentCode = document.getElementById(
+            `DepartmentCode-${index}`
+          ).style;
+          errorInputDepartmentCode.border = "1px solid red";
+          //Hiển thị lỗi trả về
+          this.listErrValidate[index] = "Mã bộ phận không được phép để trống";
+          this.isValidForInsert = false;
+        }
+        if (!data.DepartmentName) {
+          //Focus vào ô bị lỗi
+          const errorInputDepartmentName = document.getElementById(
+            `DepartmentName-${index}`
+          ).style;
+          errorInputDepartmentName.border = "1px solid red";
+          //Hiển thị lỗi trả về
+          this.listErrValidate[index] = "Tên bộ phận không được phép để trống";
+          this.isValidForInsert = false;
+        }
+        if (!data.FixedAssetCategoryCode) {
+          //Focus vào ô bị lỗi
+          const errorInputFixedAssetCategoryCode = document.getElementById(
+            `FixedAssetCategoryCode-${index}`
+          ).style;
+          FixedAssetCategoryCode.border = "1px solid red";
+          //Hiển thị lỗi trả về
+          this.listErrValidate[index] = "Mã nhóm tài sản được phép để trống";
+          this.isValidForInsert = false;
+        }
+        if (!data.FixedAssetCategoryName) {
+          //Focus vào ô bị lỗi
+          const errorInputFixedAssetCategoryName = document.getElementById(
+            `FixedAssetCategoryName-${index}`
+          ).style;
+          errorInputFixedAssetCategoryName.border = "1px solid red";
           //Hiển thị lỗi trả về
           this.listErrValidate[index] =
-            "Mã nguyên vật liệu không được phép để trống";
+            "Tên nhóm tài sản không được phép để trống";
           this.isValidForInsert = false;
         }
-        if (!data.MaterialName) {
-          //Focus vào ô bị lỗi
-          this.$nextTick(() => {
-            this.$refs.MaterialName[index].setError();
-          });
-          //Hiển thị lỗi trả về
-          this.listErrValidate[index] =
-            "Tên nguyên vật liệu không được phép để trống";
-          this.isValidForInsert = false;
-        }
-        if (!data.UnitName) {
-          //Focus vào ô bị lỗi
-          this.$nextTick(() => {
-            this.$refs.UnitName[index].setError();
-          });
-          //Hiển thị lỗi trả về
-          this.listErrValidate[index] = "Tên ĐVT không được phép để trống";
-          this.isValidForInsert = false;
-        }
-        //Kiểm tra mã code trùng trong bảng preview
-        clientDatas.filter((item) => {
-          if (
-            data.MaterialCode == item.MaterialCode &&
-            data.MaterialId != item.MaterialId
-          ) {
-            this.$nextTick(() => {
-              this.$refs.MaterialCode[index].setError();
-            });
-            this.listErrValidate[index] =
-              "Mã nguyên vật liệu không được phép để trùng trong file";
-            this.isValidForInsert = false;
-          }
-        });
       }
     },
 
@@ -439,7 +386,7 @@ export default {
         // Hiển thị form thay đổi lựa chọn file
         this.isShowTableOnClick = true;
         // Validate dữ liệu
-        // this.validateMaterialsFormServer(this.materialsToImport);
+        // this.validateDataFromClient(this.materialsToImport);
       }
     },
     /**
@@ -464,7 +411,6 @@ export default {
         .then(function (res) {
           // Lấy dữ liệu từ Api trả về
           me.materialsToImport = res.data.Result;
-          me.checkNumberOfValidObj();
         })
         .catch(function (error) {
           console.log(error);
@@ -505,9 +451,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.txt-left {
+  text-align: left;
+}
 input {
   border: none;
   outline: none;
+  height: 80%;
+  width: 80%;
+  background-color: unset;
 }
 .m-dialog-box {
   position: fixed;
