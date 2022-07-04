@@ -199,7 +199,10 @@
       @dialogShow="dialogShow"
     ></BaseDialog>
 
-    <DragFolder v-show="isShowDragFolder" />
+    <DragFolder
+      v-if="isShowDragFolder"
+      @isShowDlgImportFirstOnClick="isShowDlgImportFirstOnClick"
+    />
   </div>
 </template>
 <script>
@@ -269,8 +272,11 @@ export default {
   },
 
   methods: {
+    isShowDlgImportFirstOnClick() {
+      this.isShowDragFolder = false;
+    },
+
     importFromExcelOnClick() {
-      console.log("Show drag zone");
       this.isShowDragFolder = true;
     },
     async exportToExcelOnClick(dataExportExcel) {
