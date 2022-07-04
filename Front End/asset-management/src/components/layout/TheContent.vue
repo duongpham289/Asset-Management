@@ -29,7 +29,7 @@
           buttonTitle="+Thêm tài sản"
         ></BaseButton>
         <div class="toolbar-btn icon-box" @click="importFromExcelOnClick">
-          <div class=""></div>
+          <div class=""><i class="fa-solid fa-file-circle-plus"></i></div>
         </div>
         <div class="toolbar-btn icon-box" @click="exportToExcelOnClick">
           <div class="excel"></div>
@@ -198,11 +198,17 @@
       @getAssetData="getAssetData"
       @dialogShow="dialogShow"
     ></BaseDialog>
+
+    <DragFolder v-show="isShowDragFolder" />
   </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
+import DragFolder from "@/components/importingData/Import-Data-First.vue";
 export default {
+  components: {
+    DragFolder,
+  },
   async beforeMount() {
     this.pageSize = 20;
     // Lấy dữ liệu đã phân trang từ api
@@ -214,7 +220,7 @@ export default {
     //Lấy dữ liệu Department
 
     try {
-      const res = await axios.get('http://localhost:5290/api/v1/Departments');
+      const res = await axios.get("http://localhost:5290/api/v1/Departments");
       this.departmentData = res.data;
     } catch (error) {
       console.log(error);
@@ -223,7 +229,7 @@ export default {
     // Lấy dữ liệu Category
     try {
       const res = await axios.get(
-        'http://localhost:5290/api/v1/FixedAssetCategories'
+        "http://localhost:5290/api/v1/FixedAssetCategories"
       );
       this.categoryData = res.data;
     } catch (error) {
@@ -263,29 +269,37 @@ export default {
   },
 
   methods: {
-  async  exportToExcelOnClick(dataExportExcel){
-        // Nếu không chứa -> Xuất toàn bộ nguyên vật liệu có trong Database
-        dataExportExcel=[];
-        await this.handleExport(dataExportExcel);
+    importFromExcelOnClick() {
+      console.log("Show drag zone");
+      this.isShowDragFolder = true;
     },
-    
+    async exportToExcelOnClick(dataExportExcel) {
+      // Nếu không chứa -> Xuất toàn bộ nguyên vật liệu có trong Database
+      dataExportExcel = [];
+      await this.handleExport(dataExportExcel);
+    },
+
     async handleExport(dataExportExcel) {
       const tempDateTime = new Date();
       const fileName = `Tai-san${tempDateTime.getTime()}.xlsx`;
       await axios
-        .post("http://localhost:5290/api/v1/FixedAssets/Excel", dataExportExcel, {
-          responseType: "blob",
-          contentType: "application/json-patch+json",
-        })
+        .post(
+          "http://localhost:5290/api/v1/FixedAssets/Excel",
+          dataExportExcel,
+          {
+            responseType: "blob",
+            contentType: "application/json-patch+json",
+          }
+        )
         .then(function (res) {
           if (res) {
             var url = window.URL.createObjectURL(new Blob([res.data]));
             var a = document.createElement("a");
             a.href = url;
             a.download = fileName;
-            document.body.appendChild(a); 
+            document.body.appendChild(a);
             a.click();
-            a.remove(); 
+            a.remove();
           }
         })
         .catch(function (res) {
@@ -333,7 +347,7 @@ export default {
     async getAssetData() {
       // this.isLoading = true;
       try {
-        const res = await axios.get('http://localhost:5290/api/v1/FixedAssets');
+        const res = await axios.get("http://localhost:5290/api/v1/FixedAssets");
         this.totalAssetListLength = res.data.length;
       } catch (error) {
         console.log(error);
@@ -345,7 +359,7 @@ export default {
       this.isLoading = true;
       try {
         const res = await axios.get(
-          'http://localhost:5290/api/v1/FixedAssets/Filter',
+          "http://localhost:5290/api/v1/FixedAssets/Filter",
           {
             params: {
               FixedAssetFilter: this.searchBox,
@@ -372,12 +386,12 @@ export default {
     // click vào 1 dòng
     onRowClick(asset, $event) {
       //Nếu ấn vào edit
-      if ($event.target.classList.contains('edit')) {
+      if ($event.target.classList.contains("edit")) {
         this.showEditDialog(asset);
       }
       // Nếu ấn vào copy
-      else if ($event.target.classList.contains('copy')) {
-        console.log('second');
+      else if ($event.target.classList.contains("copy")) {
+        console.log("second");
         // this.showCloneDialog(asset.FixedAssetId);
       }
       // Nếu ấn vào cả dòng
@@ -397,7 +411,7 @@ export default {
 
     // Format tiền
     currencyFormat(value) {
-      var format = `${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+      var format = `${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
       return format;
     },
 
@@ -407,6 +421,7 @@ export default {
   },
   data() {
     return {
+      isShowDragFolder: false,
       departmentData: [],
       categoryData: [],
       isDialogShow: false,
@@ -422,4 +437,6 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+@import url("@/assets/font-awesome/css/all.min.css");
+</style>
