@@ -199,6 +199,30 @@
       @dialogShow="dialogShow"
     ></BaseDialog>
 
+     <BaseAlert
+      v-if="alert.isShow"
+      :alertType="alert.type"
+      @closeAlert="this.alertShow(false)"
+      @removeBtn="this.removeAsset"
+    >
+      <span v-if="isRemoveMulti && alert.type == 'remove'"
+        ><strong>{{ alert.title }}</strong> tài sản đã được chọn. Bạn có muốn
+        xóa các tài sản này khỏi danh sách?</span
+      >
+      <span v-else-if="alert.type == 'remove'"
+        >Bạn có muốn xóa tài sản <strong>{{ alert.title }}</strong
+        >?</span
+      >
+
+      <span v-else
+        >Tài sản có mã chứng từ
+        <strong> {{ alert.title.FixedAssetCode }} </strong> đã phát sinh ghi
+        tăng có mã <strong>{{ alert.title.LicenseCode }}</strong>
+      </span>
+    </BaseAlert>
+
+    <BaseToast v-if="toast.isShow" :title="toast.title"> </BaseToast>
+
     <DragFolder
       v-if="isShowDragFolder"
       @isShowDlgImportFirstOnClick="isShowDlgImportFirstOnClick"
@@ -362,7 +386,7 @@ export default {
         console.log(res.data);
         // Nếu trả về 1 object => có lỗi tài sản đã có chứng từ không xóa được
         if (typeof res.data == 'object') {
-          // this.alertShow(true, res.data);
+          this.alertShow(true, res.data);
         }
         // Không có lỗi thì load lại bảng
         else {
@@ -373,7 +397,7 @@ export default {
           this.getAssetData();
 
           //  Hiển thị toast xóa thành công
-          // this.toastShow('Xóa dữ liệu thành công');
+          this.toastShow('Xóa dữ liệu thành công');
           // gán lại giá trị cho list tạm thời về rỗng
           this.checkedaAssetList = [];
           // Tắt alert
@@ -498,6 +522,15 @@ export default {
       return format;
     },
 
+    //Hiển thị thông báo
+     toastShow(title) {
+      this.toast.isShow = true;
+      this.toast.title = title;
+      setTimeout(() => {
+        this.toast.isShow = false;
+      }, 3000);
+    },
+
     dialogShow(isShow) {
       this.isDialogShow = isShow;
     },
@@ -508,6 +541,10 @@ export default {
         title: '',
         isShow: false,
         type: '',
+      },
+       toast: {
+        title: '',
+        isShow: false,
       },
       isShowDragFolder: false,
       departmentData: [],
