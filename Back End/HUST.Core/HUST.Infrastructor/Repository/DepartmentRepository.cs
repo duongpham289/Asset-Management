@@ -29,5 +29,7 @@ namespace HUST.Infrastructor.Repository
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

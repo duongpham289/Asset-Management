@@ -16,10 +16,89 @@ namespace HUST.Core.Services
     {
         IEPPLusAppService _iEPPLusAppService;
         IFixedAssetRepository _fixedAssettRepository;
-        public FixedAssetService(IFixedAssetRepository fixedAssetRepository, IEPPLusAppService iEPPLusAppService) : base(fixedAssetRepository)
+        IDepartmentRepository _iDepartmentRepository;
+        public FixedAssetService(IFixedAssetRepository fixedAssetRepository, IDepartmentRepository iDepartmentRepository, IEPPLusAppService iEPPLusAppService) : base(fixedAssetRepository)
         {
             _fixedAssettRepository = fixedAssetRepository;
             _iEPPLusAppService = iEPPLusAppService;
+            _iDepartmentRepository = iDepartmentRepository;
+        }
+
+        public List<FixedAsset> InsertDatasFromFile(List<FixedAsset> fixedAssetsFromClient)
+        {
+            var fixedAssetListIsValid = new List<FixedAsset>();
+            var fixedAssetListIsNotValid = new List<FixedAsset>();
+
+            foreach (var fixedAsset in fixedAssetsFromClient)
+            {
+                if (_fixedAssettRepository.GetByName(fixedAsset.FixedAssetName) != null && _iDepartmentRepository.GetByName(fixedAsset.DepartmentName) != null)
+                {
+                    _fixedAssettRepository.GetByName(fixedAsset.FixedAssetName).DepartmentId = fixedAsset.DepartmentId;
+                }
+                else if (fixedAsset.DepartmentName != null)
+                {
+                    Department newDepartment = new Department();
+                    newDepartment.DepartmentName = fixedAsset.DepartmentName;
+                    _iDepartmentRepository.Insert(newDepartment);
+                }
+                ValidateAfterInsertToDB(fixedAsset, fixedAssetsFromClient);
+                if(fixedAsset.IsValid == true)
+                {
+                    fixedAssetListIsValid.Add(fixedAsset);
+                }
+                else
+                {
+                    fixedAssetListIsNotValid.Add(fixedAsset);
+                }
+            }
+            //Thêm những danh sách nguyên vật thỏa mãn yêu cầu
+            foreach (var fixedAssetIsValid in fixedAssetListIsValid)
+            {
+                _fixedAssettRepository.Insert(fixedAssetIsValid);
+            }
+            return fixedAssetListIsNotValid;
+        }
+
+        private FixedAsset ValidateAfterInsertToDB(FixedAsset fixedAssetToValidate, List<FixedAsset> fixedAssetsFile)
+        {
+            //validate dữ liệu
+            _error = new Dictionary<string, string>();
+            //Validate thông tin file excel
+
+            base.ValidationObject(fixedAssetToValidate);
+
+            if (_error.Count() > 0)
+            {
+                fixedAssetToValidate.IsValid = false;
+                fixedAssetToValidate.ErrorValidateNotValid = _error;
+            }
+            if (fixedAssetToValidate.FixedAssetCode != null && CheckCodeExistInFile(fixedAssetToValidate.FixedAssetCode, fixedAssetToValidate.FixedAssetId, fixedAssetsFile))
+            {
+                fixedAssetToValidate.IsValid = false;
+                _error.Add("FixedAssetCode", $"Mã tài sản không được phép trùng lặp trong file");
+                fixedAssetToValidate.ErrorValidateNotValid = _error;
+            }
+            if (_fixedAssettRepository.CheckCodeExist(fixedAssetToValidate.FixedAssetCode) == true)
+            {
+                fixedAssetToValidate.IsValid = false;
+                _error.Add("FixedAssetCode", $"Mã tài sản đã tồn tại");
+                fixedAssetToValidate.ErrorValidateNotValid = _error;
+            }
+
+            return fixedAssetToValidate;
+        }
+
+        public bool CheckCodeExistInFile(string fixedAssetCodeToCheck, Guid fixedAssetIdToCheck, List<FixedAsset> fixedAssetsFile)
+        {
+            //return materialsInFile.Select(item => item.MaterialCode).Contains(materialCodeToCheck);
+            foreach (var fixedAsset in fixedAssetsFile)
+            {
+                if (fixedAsset.FixedAssetCode == fixedAssetCodeToCheck && fixedAsset.FixedAssetId != fixedAssetIdToCheck)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

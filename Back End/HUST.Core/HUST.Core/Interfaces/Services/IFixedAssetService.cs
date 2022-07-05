@@ -14,5 +14,6 @@ namespace HUST.Core.Interfaces.Services
     {
         ObjectForExport ConfigFileToExport(List<FixedAsset> list, MemoryStream stream, string excelName);
         Task<List<FixedAsset>> Import(IFormFile formFile);
+        List<FixedAsset> InsertDatasFromFile(List<FixedAsset> fixedAssetsFromClient);
     }
 }

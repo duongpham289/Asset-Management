@@ -66,6 +66,26 @@ namespace HUST.Infrastructor.Repository
         }
 
         /// <summary>
+        /// Tìm kiếm theo tên
+        /// </summary>
+        /// <param name="entityName">Tên thuộc tính</param>
+        /// <returns>giá trị row duy nhất</returns>		
+        public T GetByName(string entityName)
+        {
+            // Thực hiện khai báo câu lệnh truy vấn SQL:
+            var sqlQuery = $"SELECT * FROM {_tableName} WHERE {_tableName}Name = @entityName";
+            var parameters = new DynamicParameters();
+            parameters.Add("@entityName", entityName);
+
+            // Thực hiện câu truy vấn:
+            var entities = _sqlConnection.QueryFirstOrDefault<T>(sqlQuery, param: parameters);
+
+            // Trả về dữ liệu dạng List:
+            return entities;
+        }
+
+
+        /// <summary>
         /// Xử lí thêm mới dữ liệu
         /// </summary>
         /// <param name="entity"></param>
@@ -183,6 +203,32 @@ namespace HUST.Infrastructor.Repository
             {
                 return false;
             }
+        }
+
+        public int InsertByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckCodeExist(string entityCode)
+        {
+            //Khai báo biến, tên bảng
+            var className = typeof(T).Name;
+            var parameters = new DynamicParameters();
+
+            //Dùng câu lệnh query
+            var sqlCommand = $"SELECT * FROM ({className}) WHERE ({className}Code) = @entityCode";
+            parameters.Add("@entityCode", entityCode);
+
+            //Gọi hàm query
+            var res = _sqlConnection.QueryFirstOrDefault(sqlCommand, param: parameters);
+            if (res == null)
+            {
+                //Không bị trùng Code
+                return false;
+            }
+
+            return true;
         }
     }
 }

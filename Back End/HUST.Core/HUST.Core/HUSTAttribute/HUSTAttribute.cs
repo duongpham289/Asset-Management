@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace HUST.Core.HUSTAttribute
 {
+   
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method)]
+    public class NotMap : Attribute
+    {
+    }
 
     /// <summary>
     /// Cờ Khóa chính

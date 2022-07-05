@@ -52,5 +52,8 @@ namespace HUST.Core.Interfaces.Respositories
         /// <param name="entityId"> Id đối tượng </param>
         /// <returns> true - đã bị trùng, false - không trùng </returns>
         bool CheckCodeExist(string entityCode, Guid? entityId);
+        T GetByName(string entityName);
+        int InsertByName(string name);
+        bool CheckCodeExist(string entityCode);
     }
 }

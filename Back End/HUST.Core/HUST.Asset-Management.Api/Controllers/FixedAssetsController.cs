@@ -19,6 +19,25 @@ namespace HUST.Asset_Management.Api.Controllers
         }
 
         /// <summary>
+        /// Save dữ liệu (tài sản) từ file excel xuống CSDL
+        /// </summary>
+        /// <param name="fixedAssets">Danh sách tài sản</param>
+        /// <returns></returns>
+        [HttpPost("SavingFile")]
+        public IActionResult SaveFromExcels(List<FixedAsset> fixedAssets)
+        {
+            try
+            {
+                var res = _fixedAssetService.InsertDatasFromFile(fixedAssets);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+
+        /// <summary>
         /// Nhập khẩu tài sản từ file excel
         /// </summary>
         /// <param name="formFile">File Excel chứa dữ liệu nhập khẩu tài sản</param>

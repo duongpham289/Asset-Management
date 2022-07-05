@@ -16,6 +16,7 @@ namespace HUST.Core.Services
         IBaseRepository<T> _baseRepository;
         protected List<String> ValidateErrorsMsg;
         string _tableName;
+        protected Dictionary<string, string> _error;
         public BaseService(IBaseRepository<T> baseRepository)
         {
             _baseRepository = baseRepository;
@@ -115,16 +116,18 @@ namespace HUST.Core.Services
                 // Kiểu dữ liệu của prop:
                 var propType = prop.PropertyType;
 
+                var isNotMap = prop.IsDefined(typeof(NotMap), true);
+
                 // Kiểm tra xem có friendly name hay không
                 var isFriendlyName = prop.IsDefined(typeof(FriendlyName), true);
-                if (isFriendlyName)
+                if (isFriendlyName && !isNotMap)
                 {
                     propFriendlyName = (prop.GetCustomAttributes(typeof(FriendlyName), true)[0] as FriendlyName).Name;
                 }
 
                 // 1. Thông tin bắt buộc nhập
                 var isNotNullOrEmpty = prop.IsDefined(typeof(IsNotNullOrEmpty), true);
-                if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == ""))
+                if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == "") && !isNotMap)
                 {
                     isValidate = false;
                     ValidateErrorsMsg.Add(string.Format("", propFriendlyName));
@@ -132,7 +135,7 @@ namespace HUST.Core.Services
 
                 // 2. Thông tin giới hạn về độ dài
                 var isMaxLength = prop.IsDefined(typeof(MaxLength), true);
-                if (isMaxLength)
+                if (isMaxLength && !isNotMap)
                 {
                     var maxLength = (prop.GetCustomAttributes(typeof(MaxLength), true)[0] as MaxLength).Length;
                     if (propValue.ToString().Length > maxLength)
@@ -143,7 +146,6 @@ namespace HUST.Core.Services
                 }
             }
             return isValidate;
-            ValidateObjectCustom(entity);
         }
 
         /// <summary>
@@ -154,6 +156,51 @@ namespace HUST.Core.Services
         protected virtual List<String> ValidateObjectCustom(T entity)
         {
             return null;
+        }
+
+        public Dictionary<string, string> ValidationObject(T entity)
+        {
+            var isValidate = true;
+
+            var properties = typeof(T).GetProperties();
+            foreach (var prop in properties)
+            {
+                // Tên của prop:
+                var propName = prop.Name;
+                var propFriendlyName = propName;
+                // Giá trị của prop:
+                var propValue = prop.GetValue(entity);
+                // Kiểu dữ liệu của prop:
+                var propType = prop.PropertyType;
+
+                var isNotMap = prop.IsDefined(typeof(NotMap), true);
+
+                // Kiểm tra xem có friendly name hay không
+                var isFriendlyName = prop.IsDefined(typeof(FriendlyName), true);
+                if (isFriendlyName && !isNotMap)
+                {
+                    propFriendlyName = (prop.GetCustomAttributes(typeof(FriendlyName), true)[0] as FriendlyName).Name;
+                }
+                // 1. Thông tin bắt buộc nhập
+                var isNotNullOrEmpty = prop.IsDefined(typeof(IsNotNullOrEmpty), true);
+                if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == "") && !isNotMap)
+                {
+                    isValidate = false;
+                    _error.Add(propName, $"{propFriendlyName} không được phép để trống");
+                }
+                // 2. Thông tin giới hạn về độ dài
+                var isMaxLength = prop.IsDefined(typeof(MaxLength), true);
+                if (isMaxLength)
+                {
+                    var maxLength = (prop.GetCustomAttributes(typeof(MaxLength), true)[0] as MaxLength).Length;
+                    if (propValue.ToString().Length > maxLength && !isNotMap)
+                    {
+                        isValidate = false;
+                        _error.Add(propName, $"{propFriendlyName} không được phép vượt quá ${maxLength}");
+                    }
+                }
+            }
+            return _error;
         }
     }
 }
