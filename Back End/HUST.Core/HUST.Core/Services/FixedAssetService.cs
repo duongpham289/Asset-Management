@@ -42,8 +42,12 @@ namespace HUST.Core.Services
                     _iDepartmentRepository.Insert(newDepartment);
                 }
                 ValidateAfterInsertToDB(fixedAsset, fixedAssetsFromClient);
-                if(fixedAsset.IsValid == true)
+                if (fixedAsset.IsValid == true)
                 {
+                    if (_fixedAssettRepository.GetByName(fixedAsset.FixedAssetName) != null && _iDepartmentRepository.GetByName(fixedAsset.DepartmentName) != null)
+                    {
+                        _fixedAssettRepository.GetByName(fixedAsset.FixedAssetName).DepartmentId = fixedAsset.DepartmentId;
+                    }
                     fixedAssetListIsValid.Add(fixedAsset);
                 }
                 else
