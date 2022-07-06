@@ -13,7 +13,6 @@
         :title="title"
         :maxlength="maxlength"
         :placeholder="placeholder"
-        @click="onClick"
         @keydown.tab="tab"
         @focus="setFocus"
         @blur="outFocus"
@@ -24,47 +23,59 @@
         :value="this.modelValue"
       />
 
-      <div
-        style="position: absolute; right: 0"
-        @click="toggleOptionList()"
-        class="icon-combobox"
-      >
+      <div @click="toggleOptionList()" class="icon-combobox">
         <div v-if="isOptionShow" class="up"></div>
         <div v-else class="down"></div>
       </div>
     </div>
-    <ul class="m-option-list" v-if="isOptionShow" ref="optionList">
-      <li
-        v-for="(option, index) in matches"
-        :key="index"
-        class="m-option-item"
-        @click="choseOption(index, option)"
-        :class="{ 'm-item-selected': this.selecedIndex == index }"
+    <!-- <div v-if="this.errorMsg" class="m-input-msg">{{ errorMsg }}</div> -->
+    <Teleport to="body">
+      <ul
+        class="m-option-list"
+        v-if="isOptionShow"
+        ref="optionList"
+        :style="{
+          top: this.optionPos.top + 'px',
+          left: this.optionPos.left + 'px',
+          width: this.optionPos.width + 'px',
+        }"
       >
-        <div class="item-text-limit">
-          {{ option[this.filterby] }}
-        </div>
-      </li>
-    </ul>
+        <li
+          v-for="(option, index) in matches"
+          :key="index"
+          class="m-option-item"
+          @click="choseOption(index, option)"
+          :class="{ 'm-item-selected': this.selecedIndex == index }"
+        >
+          <div class="item-text-limit">
+            {{ option[this.filterby] }}
+          </div>
+        </li>
+      </ul>
+    </Teleport>
   </div>
 </template>
 <script>
-import "clickout-event";
+import 'clickout-event';
 export default {
-  name: "the-combobox",
-  emits: ["blur", "keydown", "update:modelValue", "selectItem"],
+  name: 'the-combobox',
+  emits: ['blur', 'keydown', 'update:modelValue', 'selectItem'],
 
   props: [
-    "hasIcon",
-    "placeholder",
-    "filterby",
-    "optionList",
-    "modelValue",
-    "name",
-    "required",
-    "title",
-    "maxlength",
+    'hasIcon',
+    'placeholder',
+    'filterby',
+    'optionList',
+    'modelValue',
+    'name',
+    'required',
+    'title',
+    'maxlength',
   ],
+
+  created() {
+    window.addEventListener('resize', this.resizeHandler);
+  },
 
   watch: {
     /**
@@ -76,28 +87,38 @@ export default {
      */
     isFocus: function (newValue) {
       if (newValue == false) {
-        this.$refs.input.classList.remove("input-focus");
+        this.$refs.input?.classList.remove('input-focus');
 
         this.validateRequired();
       } else {
-        this.$refs.input.classList.add("input-focus");
+        this.$refs.input?.classList.add('input-focus');
       }
     },
 
+    /**
+     * Mô tả : Theo dõi sự thay đổi của selecedIndex
+     * @param
+     * @return
+     * Created by: Lê Thiện Tuấn - MF1118
+     * Created date: 22:36 11/06/2022
+     */
     selecedIndex: function (newValue, oldValue) {
       if (newValue != oldValue) {
         this.scrollToItem();
       }
     },
 
+    /**
+     * Mô tả : Lọc danh sách option theo input
+     * @param
+     * @return
+     * Created by: Lê Thiện Tuấn - MF1118
+     * Created date: 22:38 11/06/2022
+     */
     // Theo dõi giá trị mới của input để hiển thị optionList
     modelValue: function (newValue) {
-      // Hiển thị option list:
-      this.isOptionShow = true;
-      // Gán index về 0:
-      this.selecedIndex = 0;
-
-      if (newValue == undefined || newValue == "") {
+      // Lọc
+      if (newValue == undefined || newValue == '') {
         this.matches = this.optionList;
       } else {
         this.matches = this.optionList.filter((item) =>
@@ -110,6 +131,35 @@ export default {
   },
 
   methods: {
+    /**
+     * Mô tả : Xử lí khi window thay đổi (reponsive)
+     * @param
+     * @return
+     * Created by: Lê Thiện Tuấn - MF1118
+     * Created date: 22:42 11/06/2022
+     */
+    resizeHandler() {
+      if (this.isOptionShow == true) {
+        this.comboboxPos = this.$refs.combobox.getBoundingClientRect();
+        this.setPosCombobox();
+      }
+    },
+
+    /**
+     * Mô tả : Lấy vị trí combobox
+     * @param
+     * @return
+     * Created by: Lê Thiện Tuấn - MF1118
+     * Created date: 11:08 11/06/2022
+     */
+    setPosCombobox() {
+      this.optionPos = {
+        top: this.comboboxPos.top + this.comboboxPos.height,
+        left: this.comboboxPos.left,
+        width: this.comboboxPos.width,
+      };
+    },
+
     /**
      * Mô tả : chọn ô input thì bôi đen chữ
      * @param
@@ -131,7 +181,7 @@ export default {
     onChangeHandler(e) {
       e.preventDefault();
       //gán lại giá trị
-      this.$emit("update:modelValue", e.target.value);
+      this.$emit('update:modelValue', e.target.value);
     },
 
     /**
@@ -144,14 +194,17 @@ export default {
     setFocus() {
       this.isFocus = true;
       // Nếu chưa nhập gì thì matches list hiển thị tất cả
-      if (this.$refs.input.value == null || this.$refs.input.value == "") {
+      if (this.$refs.input?.value == null || this.$refs.input?.value == '') {
         this.matches = this.optionList;
       }
 
       if (this.isToggle == true) {
-        // Hiển thị option List:
         this.isOptionShow = !this.isOptionShow;
       } else {
+        // Hiển thị option List:
+        this.comboboxPos = this.$refs.combobox.getBoundingClientRect();
+
+        this.setPosCombobox();
         this.isOptionShow = true;
       }
 
@@ -159,12 +212,8 @@ export default {
       this.scrollToItem();
 
       // Bôi đen tất cả text
-      this.$refs.input.select();
+      this.$refs.input?.select();
     },
-
-    // outFocus() {
-    //   this.isFocus = false;
-    // },
 
     /**
      * Mô tả : Validate required
@@ -174,29 +223,36 @@ export default {
      * Created date: 16:54 06/05/2022
      */
     validateRequired() {
-      if (
-        this.required &&
-        (this.modelValue === undefined || this.modelValue.trim() === "")
-      ) {
-        this.$refs.input.classList.add("m-input-error");
+      var value = this.$refs.input?.value;
+      if (this.required && (value == undefined || value.toString() == '')) {
+        this.$refs.input?.classList.add('m-input-error');
+        this.createErrorMsg();
       } else {
-        this.$refs.input.classList.remove("m-input-error");
+        this.$refs.input?.classList.remove('m-input-error');
+        this.errorMsg = '';
       }
     },
 
     /**
-    //  * Mô tả : clear input
-    //  * @param
-    //  * @return
-    //  * Created by: Lê Thiện Tuấn - MF1118
-    //  * Created date: 14:52 28/04/2022
-    //  */
-    // clearInput() {
-    //   this.$emit("update:modelValue");
-    //   this.isOptionShow = false;
-    //   // this.validateRequired();
-    //   this.selecedIndex = 0;
-    // },
+     * Mô tả : Tạo error msg
+     * @param
+     * @return
+     * Created by: Lê Thiện Tuấn - MF1118
+     * Created date: 22:43 18/06/2022
+     */
+    createErrorMsg() {
+      var inputName = this.$refs.input?.name;
+      if (inputName == undefined || inputName == '') {
+        this.errorMsg = 'Ô này không được để trống!';
+      } else {
+        this.errorMsg = `${inputName} không được để trống!`;
+      }
+    },
+
+    setErrorMsg(value) {
+      this.errorMsg = value;
+      this.$refs.input?.classList.add('m-input-error');
+    },
 
     /**
      * Mô tả : xử lí sự kiện onClick vào optionList
@@ -224,7 +280,7 @@ export default {
       this.selecedItem = this.matches[this.selecedIndex];
       // 1.2 Cập nhật giá trị vào input
       await this.$emit(
-        "update:modelValue",
+        'update:modelValue',
         this.matches[this.selecedIndex][this.filterby]
       );
 
@@ -237,11 +293,12 @@ export default {
       this.matches = [...this.optionList];
 
       //  truyền cả obj lên cho component cha:
-      this.$emit("selectItem", this.selecedItem);
+      this.$emit('selectItem', this.selecedItem);
       // Validate lại dữ liệu:
       this.isOptionShow = false;
       // Bôi đen chữ
-      this.$refs.input.select();
+      this.$refs.input?.blur();
+      this.isFocus = false;
     },
 
     /**
@@ -296,8 +353,11 @@ export default {
      */
     toggleOptionList() {
       this.isToggle = true;
+      this.comboboxPos = this.$refs.combobox.getBoundingClientRect();
+
+      this.setPosCombobox();
       // this.isOptionShow = false;
-      this.$refs.input.focus();
+      this.$refs.input?.focus();
     },
 
     /**
@@ -324,6 +384,9 @@ export default {
       isFocus: false,
       isOptionShow: false,
       isToggle: false,
+      optionPos: {},
+      comboboxPos: {},
+      errorMsg: null,
     };
   },
 };

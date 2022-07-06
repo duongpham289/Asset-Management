@@ -7,20 +7,33 @@
             placeholder="Tìm kiếm tài sản"
             ref="searchInput"
             class="m-search"
-            @input="searchInput"
+            v-model="searchBox"
+            @keydown.enter="filterAsset"
           />
           <div class="search-icon">
             <div class="search"></div>
           </div>
         </div>
         <div class="toolbar-field combobox-field">
-          <!-- <BaseCombobox></BaseCombobox> -->
-          <BaseInput class="m-input"></BaseInput>
+          <BaseCombobox
+            :hasIcon="true"
+            :optionList="categoryData"
+            @selectItem="filterClick"
+            filterby="FixedAssetCategoryName"
+            placeholder="Loại tài sản"
+            v-model="searchCategory"
+          ></BaseCombobox>
         </div>
 
         <div class="toolbar-field combobox-field">
-          <BaseInput class="m-input"></BaseInput>
-          <!-- <BaseCombobox></BaseCombobox> -->
+          <BaseCombobox
+            :hasIcon="true"
+            :optionList="departmentData"
+            @selectItem="filterClick"
+            filterby="DepartmentName"
+            placeholder="Bộ phận sử dụng"
+            v-model="searchDepartment"
+          ></BaseCombobox>
         </div>
       </div>
       <div class="m-toolbar-right">
@@ -29,7 +42,10 @@
           buttonTitle="+Thêm tài sản"
           @click="showAddDialog"
         ></BaseButton>
-        <div class="toolbar-btn icon-box cursor-pointer" @click="importFromExcelOnClick">
+        <div
+          class="toolbar-btn icon-box cursor-pointer"
+          @click="importFromExcelOnClick"
+        >
           <div class="">+</div>
         </div>
         <div
@@ -231,11 +247,27 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import DragFolder from "@/components/importingData/Import-Data-First.vue";
+import axios from 'axios';
+import DragFolder from '@/components/importingData/Import-Data-First.vue';
 export default {
   components: {
     DragFolder,
+  },
+
+  watch: {
+    //Theo dõi trường search nếu rỗng thì trả về danh sách đầy đủ
+
+    searchDepartment(newValue) {
+      if (newValue == '' || newValue == null) {
+        this.filterAsset();
+      }
+    },
+
+    searchCategory(newValue) {
+      if (newValue == '' || newValue == null) {
+        this.filterAsset();
+      }
+    },
   },
   async beforeMount() {
     this.pageSize = 20;
@@ -248,7 +280,7 @@ export default {
     //Lấy dữ liệu Department
 
     try {
-      const res = await axios.get("http://localhost:5290/api/v1/Departments");
+      const res = await axios.get('http://localhost:5290/api/v1/Departments');
       this.departmentData = res.data;
     } catch (error) {
       console.log(error);
@@ -257,7 +289,7 @@ export default {
     // Lấy dữ liệu Category
     try {
       const res = await axios.get(
-        "http://localhost:5290/api/v1/FixedAssetCategories"
+        'http://localhost:5290/api/v1/FixedAssetCategories'
       );
       this.categoryData = res.data;
     } catch (error) {
@@ -297,10 +329,15 @@ export default {
   },
 
   methods: {
+    filterClick() {
+      this.pageIndex = 1;
+      this.filterAsset();
+    },
+
     async getNewAssetCode() {
       try {
         var res = await axios.get(
-          "http://localhost:5290/api/v1/FixedAssets/NewFixedAssetCode"
+          'http://localhost:5290/api/v1/FixedAssets/NewFixedAssetCode'
         );
         // Gán dữ liệu trả về vào asset Code mới
         this.newAssetCode = res.data;
@@ -344,18 +381,18 @@ export default {
       const fileName = `Tai-san${tempDateTime.getTime()}.xlsx`;
       await axios
         .post(
-          "http://localhost:5290/api/v1/FixedAssets/Excel",
+          'http://localhost:5290/api/v1/FixedAssets/Excel',
           dataExportExcel,
           {
-            responseType: "blob",
-            contentType: "application/json-patch+json",
+            responseType: 'blob',
+            contentType: 'application/json-patch+json',
           }
         )
         .then(function (res) {
           if (res) {
             me.isLoadingV2 = false;
             var url = window.URL.createObjectURL(new Blob([res.data]));
-            var a = document.createElement("a");
+            var a = document.createElement('a');
             a.href = url;
             a.download = fileName;
             document.body.appendChild(a);
@@ -377,14 +414,14 @@ export default {
       // 2. Hiển thị thông báo:
       // 2.1 Nếu chưa chọn tài sản nào:
       if (this.checkedaAssetList.length == 0) {
-        this.alertShow(true, "Bạn chưa chọn sản phẩm để xóa");
+        this.alertShow(true, 'Bạn chưa chọn sản phẩm để xóa');
       } else if (this.checkedaAssetList.length == 1) {
         this.isRemoveMulti = false;
 
         this.alertShow(
           true,
           this.checkedaAssetList[0].FixedAssetCode,
-          "remove"
+          'remove'
         );
       } else {
         this.isRemoveMulti = true;
@@ -392,7 +429,7 @@ export default {
         var length = this.checkedaAssetList.length;
         // hiển thị title cảnh báo
         var title = length < 10 ? `0${length}` : length;
-        this.alertShow(true, title, "remove");
+        this.alertShow(true, title, 'remove');
       }
     },
 
@@ -410,13 +447,13 @@ export default {
           {
             data: JSON.stringify(idList),
             headers: {
-              "content-type": "application/json",
+              'content-type': 'application/json',
             },
           }
         );
         console.log(res.data);
         // Nếu trả về 1 object => có lỗi tài sản đã có chứng từ không xóa được
-        if (typeof res.data == "object") {
+        if (typeof res.data == 'object') {
           this.alertShow(true, res.data);
         }
         // Không có lỗi thì load lại bảng
@@ -428,7 +465,7 @@ export default {
           this.getAssetData();
 
           //  Hiển thị toast xóa thành công
-          this.toastShow("Xóa dữ liệu thành công");
+          this.toastShow('Xóa dữ liệu thành công');
           // gán lại giá trị cho list tạm thời về rỗng
           this.checkedaAssetList = [];
           // Tắt alert
@@ -485,7 +522,7 @@ export default {
     async getAssetData() {
       // this.isLoading = true;
       try {
-        const res = await axios.get("http://localhost:5290/api/v1/FixedAssets");
+        const res = await axios.get('http://localhost:5290/api/v1/FixedAssets');
         this.totalAssetListLength = res.data.length;
       } catch (error) {
         console.log(error);
@@ -498,7 +535,7 @@ export default {
       this.isLoading = true;
       try {
         const res = await axios.get(
-          "http://localhost:5290/api/v1/FixedAssets/Filter",
+          'http://localhost:5290/api/v1/FixedAssets/Filter',
           {
             params: {
               FixedAssetFilter: this.searchBox,
@@ -522,16 +559,27 @@ export default {
       }
     },
 
+    async showCloneDialog(assetId) {
+      // Lấy mã mới
+      await this.getNewAssetCode();
+      // Lấy dữ liệu theo Id
+      await this.getAssetById(assetId);
+      // Gán newcode vào dữ liệu của dòng đã chọn
+      this.assetSelected.FixedAssetCode = this.newAssetCode;
+      // Hiện thị dialog
+      this.isEditing = false;
+      this.dialogShow(true);
+    },
+
     // click vào 1 dòng
     onRowClick(asset, $event) {
       //Nếu ấn vào edit
-      if ($event.target.classList.contains("edit")) {
+      if ($event.target.classList.contains('edit')) {
         this.showEditDialog(asset);
       }
       // Nếu ấn vào copy
-      else if ($event.target.classList.contains("copy")) {
-        console.log("second");
-        // this.showCloneDialog(asset.FixedAssetId);
+      else if ($event.target.classList.contains('copy')) {
+        this.showCloneDialog(asset.FixedAssetId);
       }
       // Nếu ấn vào cả dòng
       else {
@@ -550,7 +598,7 @@ export default {
 
     // Format tiền
     currencyFormat(value) {
-      var format = `${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+      var format = `${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
       return format;
     },
 
@@ -571,12 +619,12 @@ export default {
     return {
       isLostConnection: false,
       alert: {
-        title: "",
+        title: '',
         isShow: false,
-        type: "",
+        type: '',
       },
       toast: {
-        title: "",
+        title: '',
         isShow: false,
       },
       isLoadingV2: false,
@@ -598,5 +646,5 @@ export default {
 };
 </script>
 <style scoped>
-@import url("@/assets/font-awesome/css/all.min.css");
+@import url('@/assets/font-awesome/css/all.min.css');
 </style>
