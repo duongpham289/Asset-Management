@@ -30,7 +30,7 @@
           @click="showAddDialog"
         ></BaseButton>
         <div class="toolbar-btn icon-box cursor-pointer" @click="importFromExcelOnClick">
-          <div class=""><i class="fa-solid fa-file-circle-plus"></i></div>
+          <div class="">+</div>
         </div>
         <div class="toolbar-btn icon-box cursor-pointer" @click="exportToExcelOnClick">
           <div class="excel"></div>

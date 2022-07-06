@@ -1,0 +1,78 @@
+.calendar-next-enter-active,
+.calendar-next-leave-active,
+.calendar-prev-enter-active,
+.calendar-prev-leave-active {
+  transition: all 0s ease-out !important;
+}
+
+.dp-menu-appear-enter-active,
+.dp-menu-appear-leave-active,
+.dp-slide-up-enter-active,
+.dp-slide-up-leave-active,
+.dp-slide-down-enter-active,
+.dp-slide-down-leave-active {
+  transition: all 0s ease-out !important;
+}
+
+.dp-slide-down-leave-to,
+.dp-slide-up-enter-from {
+  opacity: 0;
+  transform: none !important;
+}
+
+.calendar-next-enter-from {
+  opacity: 0;
+  transform: none !important;
+}
+
+.calendar-next-leave-to {
+  opacity: 0;
+  transform: none !important;
+}
+
+.calendar-prev-enter-from {
+  opacity: 0;
+  transform: none !important;
+}
+
+.dp__menu {
+  font-family: MISA Font !important;
+  font-size: 13px !important;
+}
+
+.dp__input {
+  height: 36px !important;
+  font-family: MISA Font !important;
+  transition: none;
+  font-size: 13px !important;
+}
+.dp__input_icon_pad {
+  width: 100% !important;
+  padding-left: 14px !important;
+  border: 1px solid #afafaf !important;
+}
+
+.dp__input_focus {
+  border: 1px solid #22a7ca !important;
+}
+
+.dp__input_icon {
+  right: 0 !important;
+}
+
+.dp__input_icons {
+  display: none !important;
+}
+
+.datepicker-container {
+  position: relative;
+}
+
+.datepicker-container .datepicker-icon {
+  background: url('../../assets/icon/qlts-icon.png') no-repeat -287px -67px;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 10px;
+  top: 25%;
+}

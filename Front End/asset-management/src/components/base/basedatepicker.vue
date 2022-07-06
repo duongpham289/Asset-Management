@@ -2,7 +2,6 @@
   <div class="datepicker-container">
     <Datepicker
       ref="datepicker"
-      locale="vi"
       cancelText="Hủy"
       selectText="Chọn"
       format="dd/MM/yyyy"
@@ -19,17 +18,18 @@
       :required="required"
     >
     </Datepicker>
+    <div v-if="this.errorMsg" class="m-input-msg">{{ errorMsg }}</div>
     <div class="datepicker-icon"></div>
   </div>
 </template>
 <script>
-import Datepicker from '@vuepic/vue-datepicker';
+import Datepicker from "@vuepic/vue-datepicker";
 
 export default {
-  name: 'date-picker',
+  name: "the-date-picker",
   components: { Datepicker },
 
-  props: ['modelValue', 'name', 'required'],
+  props: ["modelValue", "name", "required"],
 
   // beforeMount() {
   //   this.date = this.modelValue;
@@ -44,7 +44,7 @@ export default {
      */
     async handleDate(value) {
       this.date = value;
-      await this.$emit('update:modelValue', this.date);
+      await this.$emit("update:modelValue", this.date);
     },
 
     /**
@@ -55,7 +55,8 @@ export default {
      * Created date: 01:12 31/05/2022
      */
     setFocus() {
-      this.inputClassName = 'm-input-focus';
+      this.inputClassName = "m-input-focus";
+      this.errorMsg = null;
     },
 
     /**
@@ -66,7 +67,7 @@ export default {
      * Created date: 01:12 31/05/2022
      */
     setBlur() {
-      this.inputClassName = '';
+      this.inputClassName = "";
       this.validateRequired();
     },
 
@@ -78,16 +79,38 @@ export default {
      * Created date: 01:12 31/05/2022
      */
     validateRequired() {
-      if (this.required == true && (this.date == null || this.date == '')) {
-        this.inputClassName = 'm-input-error';
+      if (this.required == true && (this.date == null || this.date == "")) {
+        this.inputClassName = "m-input-error";
+        this.createErrorMsg();
       } else {
-        this.inputClassName = '';
+        this.inputClassName = "";
+        this.errorMsg = "";
+      }
+    },
+
+    /**
+     * Mô tả : Tạo error msg
+     * @param
+     * @return
+     * Created by: Lê Thiện Tuấn - MF1118
+     * Created date: 15:08 21/06/2022
+     */
+    createErrorMsg() {
+      var inputName = this.name;
+      if (inputName == undefined || inputName == "") {
+        this.errorMsg = "Ô này không được để trống!";
+      } else {
+        this.errorMsg = `${inputName} không được để trống!`;
       }
     },
   },
 
   data() {
-    return { date: this.modelValue, inputClassName: null };
+    return {
+      date: this.modelValue,
+      inputClassName: null,
+      errorMsg: "",
+    };
   },
 };
 </script>
