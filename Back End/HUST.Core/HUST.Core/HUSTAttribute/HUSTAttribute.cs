@@ -55,4 +55,17 @@ namespace HUST.Core.HUSTAttribute
             Length = length;
         }
     }
+
+    /// <summary>
+    /// Thuộc tính xuất file excel
+    /// </summary>
+    /// CreatedBy: PHDUONG (03/09/2021)
+    public class HUSTPropExport : Attribute
+    {
+        public readonly string Name;
+        public HUSTPropExport(string name)
+        {
+            this.Name = name;
+        }
+    }
 }

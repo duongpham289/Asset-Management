@@ -23,6 +23,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Mã tài sản")]
         [MaxLength(50)]
+        [HUSTPropExport(("Mã tài sản"))]
         public string FixedAssetCode { get; set; }
 
         /// <summary>
@@ -31,6 +32,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Tên tài sản")]
         [MaxLength(255)]
+        [HUSTPropExport(("Tên tài sản"))]
         public string FixedAssetName { get; set; }
 
         /// <summary>
@@ -53,6 +55,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Tên bộ phận sử dụng")]
         [MaxLength(255)]
+        [HUSTPropExport(("Tên bộ phận sử dụng"))]
         public string DepartmentName { get; set; }
 
         /// <summary>
@@ -74,6 +77,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Tên loại tài sản")]
         [MaxLength(255)]
+        [HUSTPropExport(("Tên loại tài sản"))]
         public string FixedAssetCategoryName { get; set; }
 
         /// <summary>
@@ -82,6 +86,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Ngày mua")]
         [MaxLength(255)]
+        [HUSTPropExport(("Ngày mua"))]
         public DateTime? PurchaseDate { get; set; }
 
         /// <summary>
@@ -90,6 +95,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Ngày bắt đầu sử dụng")]
         [MaxLength(255)]
+        [HUSTPropExport(("Ngày bắt đầu sử dụng"))]
         public DateTime? UseDate { get; set; }
 
         /// <summary>
@@ -97,6 +103,7 @@ namespace HUST.Core.Entities
         /// </summary>
         [FriendlyName("Lũy kế")]
         [MaxLength(255)]
+        [HUSTPropExport(("Lũy kế"))]
         public decimal Accumulated { get; set; }
 
         /// <summary>
@@ -105,6 +112,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Nguyên giá")]
         [MaxLength(255)]
+        [HUSTPropExport(("Nguyên giá"))]
         public decimal Cost { get; set; }
 
         /// <summary>
@@ -113,14 +121,16 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Số lượng")]
         [MaxLength(255)]
+        [HUSTPropExport(("Số lượng"))]
         public int Quantity { get; set; }
 
         /// <summary>
         /// Tỷ lệ hao mòn
         /// </summary>
         [IsNotNullOrEmpty]
-        [FriendlyName("Tỷ lệ hao mòn ")]
+        [FriendlyName("Tỷ lệ hao mòn")]
         [MaxLength(255)]
+        [HUSTPropExport(("Tỷ lệ hao mòn"))]
         public float DepreciationRate { get; set; }
 
         /// <summary>
@@ -129,6 +139,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Giá trị hao mòn năm")]
         [MaxLength(255)]
+        [HUSTPropExport(("Giá trị hao mòn năm"))]
         public float DepreciationValue { get; set; }
 
         /// <summary>
@@ -137,6 +148,7 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Năm bắt đầu theo dõi tài sản")]
         [MaxLength(255)]
+        [HUSTPropExport(("Năm bắt đầu theo dõi tài sản"))]
         public int? TrackedYear { get; set; }
 
         /// <summary>
@@ -145,12 +157,14 @@ namespace HUST.Core.Entities
         [IsNotNullOrEmpty]
         [FriendlyName("Số năm sử dụng")]
         [MaxLength(255)]
+        [HUSTPropExport(("Số năm sử dụng"))]
         public int LifeTime { get; set; }
 
         /// <summary>
         /// Năm sử dụng
         /// </summary>
         [FriendlyName("Năm sử dụng")]
+        [HUSTPropExport(("Năm sử dụng"))]
         public int? ProductionYear { get; set; }
 
         [NotMap]

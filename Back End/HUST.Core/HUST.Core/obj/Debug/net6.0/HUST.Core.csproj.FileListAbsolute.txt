@@ -40,3 +40,17 @@ C:\Users\ADMIN\Desktop\fixedassets\Asset-Management\Back End\HUST.Core\HUST.Core
 C:\Users\ADMIN\Desktop\fixedassets\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\refint\HUST.Core.dll
 C:\Users\ADMIN\Desktop\fixedassets\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.pdb
 C:\Users\ADMIN\Desktop\fixedassets\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\ref\HUST.Core.dll
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\bin\Debug\net6.0\HUST.Core.deps.json
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\bin\Debug\net6.0\HUST.Core.dll
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\bin\Debug\net6.0\HUST.Core.pdb
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.csproj.AssemblyReference.cache
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.Resources.HUSTResource.resources
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.csproj.GenerateResource.cache
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.AssemblyInfoInputs.cache
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.AssemblyInfo.cs
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.csproj.CoreCompileInputs.cache
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.dll
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\refint\HUST.Core.dll
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\HUST.Core.pdb
+D:\Work\Asset-Management\Back End\HUST.Core\HUST.Core\obj\Debug\net6.0\ref\HUST.Core.dll
