@@ -6,7 +6,7 @@
         <div class="main-login-ctn">
           <div class="logo"></div>
           <div class="logo-text">
-            Đăng nhập để làm việc với <b>MISA QLTS</b>
+            Đăng nhập để làm việc với <b>HUST QLTS</b>
           </div>
 
           <div id="normal-login">
