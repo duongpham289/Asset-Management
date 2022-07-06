@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: 'the-loading',
+};
 </script>
 <style></style>

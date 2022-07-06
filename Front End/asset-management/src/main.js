@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import Button from './components/base/basebutton.vue';
+import Loading from './components/base/baseloading.vue';
 import Alert from './components/base/basealert.vue';
 import Toast from './components/base/basetoast.vue';
 import Checkbox from './components/base/basecheckbox.vue';
@@ -13,6 +14,7 @@ import Paginate from 'vuejs-paginate-next';
 
 const app = createApp(App);
 app.component('BaseButton', Button);
+app.component('BaseLoading', Loading);
 app.component('BaseAlert', Alert);
 app.component('BaseToast', Toast);
 app.component('BaseCheckbox', Checkbox);

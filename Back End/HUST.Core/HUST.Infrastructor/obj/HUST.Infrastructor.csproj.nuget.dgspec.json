@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj": {}
+    "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj": {
+    "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
+        "projectUniqueName": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
         "projectName": "HUST.Core",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\obj\\",
+        "projectPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj",
+        "packagesPath": "C:\\Users\\DUONG.PH187315\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DUONG.PH187315\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,6 +55,10 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.1.10, )"
+            },
+            "OfficeOpenXml.Core.ExcelPackage": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [
@@ -72,21 +76,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj": {
+    "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj",
+        "projectUniqueName": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj",
         "projectName": "HUST.Infrastructor",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\obj\\",
+        "projectPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj",
+        "packagesPath": "C:\\Users\\DUONG.PH187315\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DUONG.PH187315\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -100,8 +104,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\GitFixedAssets\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj"
+              "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj": {
+                "projectPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj"
               }
             }
           }
@@ -127,6 +131,10 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.1.10, )"
+            },
+            "OfficeOpenXml.Core.ExcelPackage": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [
@@ -144,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

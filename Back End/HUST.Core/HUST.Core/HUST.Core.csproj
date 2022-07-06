@@ -11,6 +11,7 @@
     <PackageReference Include="EPPlus" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="6.0.0-preview.4.21253.5" />
     <PackageReference Include="MySqlConnector" Version="2.1.10" />
+    <PackageReference Include="OfficeOpenXml.Core.ExcelPackage" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

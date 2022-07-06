@@ -27,14 +27,15 @@
         <BaseButton
           style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16)"
           buttonTitle="+Thêm tài sản"
+          @click="showAddDialog"
         ></BaseButton>
-        <div class="toolbar-btn icon-box" @click="importFromExcelOnClick">
+        <div class="toolbar-btn icon-box cursor-pointer" @click="importFromExcelOnClick">
           <div class=""><i class="fa-solid fa-file-circle-plus"></i></div>
         </div>
-        <div class="toolbar-btn icon-box" @click="exportToExcelOnClick">
+        <div class="toolbar-btn icon-box cursor-pointer" @click="exportToExcelOnClick">
           <div class="excel"></div>
         </div>
-        <div class="toolbar-btn icon-box" @click="btnRemove">
+        <div class="toolbar-btn icon-box cursor-pointer" @click="btnRemove">
           <div class="remove"></div>
         </div>
       </div>
@@ -67,13 +68,13 @@
               <th class="text-align-center w-90">Chức năng</th>
             </tr>
           </thead>
-          <!-- <div v-if="isLostConnection" class="table-msg">
+          <div v-if="isLostConnection" class="table-msg">
             Không thể tải được dữ liệu
-          </div> -->
-          <!-- <BaseLoading v-else-if="isLoading"></BaseLoading> -->
-          <!-- <div v-else-if="this.assetData.length == 0" class="table-msg">
+          </div>
+          <BaseLoading v-else-if="isLoading"></BaseLoading>
+          <div v-else-if="this.assetData.length == 0" class="table-msg">
             Không có dữ liệu
-          </div> -->
+          </div>
           <tbody>
             <tr
               @dblclick="showEditDialog(asset)"
@@ -199,7 +200,7 @@
       @dialogShow="dialogShow"
     ></BaseDialog>
 
-     <BaseAlert
+    <BaseAlert
       v-if="alert.isShow"
       :alertType="alert.type"
       @closeAlert="this.alertShow(false)"
@@ -214,11 +215,7 @@
         >?</span
       >
 
-      <span v-else
-        >Tài sản có mã chứng từ
-        <strong> {{ alert.title.FixedAssetCode }} </strong> đã phát sinh ghi
-        tăng có mã <strong>{{ alert.title.LicenseCode }}</strong>
-      </span>
+      <span v-else>Chọn ít nhất một tài sản để xóa </span>
     </BaseAlert>
 
     <BaseToast v-if="toast.isShow" :title="toast.title"> </BaseToast>
@@ -296,6 +293,33 @@ export default {
   },
 
   methods: {
+    async getNewAssetCode() {
+      try {
+        var res = await axios.get(
+          'http://localhost:5290/api/v1/FixedAssets/NewFixedAssetCode'
+        );
+        // Gán dữ liệu trả về vào asset Code mới
+        this.newAssetCode = res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async showAddDialog() {
+      await this.getNewAssetCode();
+      this.assetSelected = {
+        FixedAssetCode: this.newAssetCode,
+        Cost: 0,
+        DepreciationRate: 0,
+        DepreciationValue: 0,
+        Quantity: 0,
+        PurchaseDate: new Date(),
+        UseDate: new Date(),
+      };
+      this.dialogShow(true);
+      this.isEditing = false;
+    },
+
     isShowDlgImportFirstOnClick() {
       this.isShowDragFolder = false;
     },
@@ -463,6 +487,7 @@ export default {
 
     // Lấy danh sách đã phân trang
     async filterAsset() {
+      this.isLostConnection = false;
       this.isLoading = true;
       try {
         const res = await axios.get(
@@ -523,7 +548,7 @@ export default {
     },
 
     //Hiển thị thông báo
-     toastShow(title) {
+    toastShow(title) {
       this.toast.isShow = true;
       this.toast.title = title;
       setTimeout(() => {
@@ -537,12 +562,13 @@ export default {
   },
   data() {
     return {
+      isLostConnection: false,
       alert: {
         title: '',
         isShow: false,
         type: '',
       },
-       toast: {
+      toast: {
         title: '',
         isShow: false,
       },
@@ -558,6 +584,7 @@ export default {
       searchBox: null,
       pageIndex: null,
       pageSize: null,
+      newAssetCode: null,
     };
   },
 };
