@@ -7,6 +7,7 @@ import Toast from './components/base/basetoast.vue';
 import Checkbox from './components/base/basecheckbox.vue';
 import Dialog from './components/base/basedialog.vue';
 import Input from './components/base/baseinput.vue';
+import Spinner from './components/base/BaseSpinner.vue';
 import Datepicker from './components/base/basedatepicker.vue';
 import Combobox from './components/base/basecombobox.vue';
 import Dropdown from './components/base/basedropdown.vue';
@@ -24,5 +25,6 @@ app.component('DatePicker', Datepicker);
 app.component('BaseCombobox', Combobox);
 app.component('BaseDropdown', Dropdown);
 app.component('BasePaginate', Paginate);
+app.component('BaseSpinner', Spinner);
 
 app.mount('#app');

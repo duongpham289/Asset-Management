@@ -15,6 +15,7 @@
 @import url(./base/alert.css);
 @import url(./base/combobox.css);
 @import url(./base/datePicker.css);
+@import url(./base/spinner.css);
 @import url(./base/dialog.css);
 @import url('@/assets/font-awesome/css/all.min.css');
 /* @import url(./base/dialog.css); */

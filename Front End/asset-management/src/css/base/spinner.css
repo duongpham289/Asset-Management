@@ -1,0 +1,29 @@
+.spinner-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .spinner-icon {
+    display: flex;
+    justify-content: center;
+    zoom: 1.3;
+  }
+  .spinner-text {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 0 0;
+    font-size: 20px;
+    color: white;
+  }
