@@ -35,12 +35,12 @@ namespace HUST.Infrastructor.Library
                         //material.UnitId = Guid.Parse("153105e0-6702-29ed-7632-03c92da59c43");
 
                         //Duyệt từng đối tượng(row) trong file excel
-                        fixedAsset.FixedAssetCode = worksheet.Cells[row, 1].Value?.ToString();
-                        fixedAsset.FixedAssetName = worksheet.Cells[row, 2].Value?.ToString();
-                        fixedAsset.DepartmentCode = worksheet.Cells[row, 3].Value?.ToString();
-                        fixedAsset.DepartmentName = worksheet.Cells[row, 4].Value?.ToString();
-                        fixedAsset.FixedAssetCategoryCode = worksheet.Cells[row, 5].Value?.ToString();
-                        fixedAsset.FixedAssetCategoryName = worksheet.Cells[row, 6].Value?.ToString();
+                        fixedAsset.FixedAssetCode = worksheet.Cells[row, 2].Value?.ToString();
+                        fixedAsset.FixedAssetName = worksheet.Cells[row, 3].Value?.ToString();
+                        fixedAsset.DepartmentCode = worksheet.Cells[row, 4].Value?.ToString();
+                        fixedAsset.DepartmentName = worksheet.Cells[row, 5].Value?.ToString();
+                        fixedAsset.FixedAssetCategoryCode = worksheet.Cells[row, 6].Value?.ToString();
+                        fixedAsset.FixedAssetCategoryName = worksheet.Cells[row, 7].Value?.ToString();
 
                         fixedAssets.Add(fixedAsset);
                     }
