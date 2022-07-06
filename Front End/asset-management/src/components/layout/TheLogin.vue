@@ -1,61 +1,92 @@
 <template>
-  <div id="frmLogin">
-    <div class="login w-100 h-100">
-      <div class="grid-login">
-        <div class="half-ctn img-login"></div>
-        <div class="half-ctn">
-          <div class="main-login-ctn">
-          
-            <div class="logo"></div>
-            <div class="logo-text">
-              Đăng nhập để làm việc với <b>MISA QLTS</b>
-            </div>
-            <form @submit.prevent="submit" id="normal-login">
-              <div class="grid-login-normal">
-                <div class="username-login">
-                  <MISAInput
-                    id="iptUserName"
-                    ref="userName"
-                    :tag="'userName'"
-                    class="input-login"
-                    
-                    placeholder="Username, email hoặc số điện thoại"
-                    @focus="this.showError = false"
-                    @changeInput="changeInput"
-                  />
-                </div>
-                <div class="password-login">
-                  <MISAInput
-                    :tag="'passWord'"
-                    ref="passWord"
-                    id="iptPassword"
-                    type="passWord"
-                    
-                    placeholder="Mật khẩu"
-                    class="input-login"
-                    @focus="this.showError = false"
-                    @changeInput="changeInput"
-                  />
-                  <div class="eye on-eye"></div>
-                </div>
+  <div class="m-login">
+    <div class="grip-login">
+      <div class="half-ctn left-grip"></div>
+      <div class="half-ctn right-grip">
+        <div class="main-login-ctn">
+          <div class="logo"></div>
+          <div class="logo-text">
+            Đăng nhập để làm việc với <b>MISA QLTS</b>
+          </div>
 
-                <div class="button-login" style="margin-top: 20px; margin-bottom:10px ">
-                  <button type="submit" class="button button-text" id="login">
-                    Đăng nhập
-                  </button>
-                </div>
+          <div id="normal-login">
+            <form class="grid-login-normal">
+              <div class="username-login">
+                <input
+                  id="iptUserName"
+                  class="input-login"
+                  placeholder="Username, email hoặc số điện thoại"
+                  v-model="this.loginForm.email"
+                />
+              </div>
+              <div class="password-login">
+                <input
+                  autocomplete
+                  id="iptPassword"
+                  type="password"
+                  placeholder="Mật khẩu"
+                  class="input-login"
+                  v-model="this.loginForm.password"
+                />
+                <div class="eye on-eye"></div>
+              </div>
+
+              <div class="button-login" style="margin-top: 20px">
+                <button @click.prevent="onLoginClick" class="button" id="login">
+                  Đăng nhập
+                </button>
               </div>
             </form>
-              <div v-if="this.showError" class="wrong-login">
-              <div style="text-align: left; font-weight: 700; color: red;">
-                Sai tài khoản hoặc mật khẩu, vui lòng đăng nhập lại.
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-<style scoped>
-</style>
+<script>
+import axios from 'axios';
+import { mapGetters, mapMutations } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['user']),
+  },
+
+  methods: {
+    ...mapMutations(['setUser']),
+    /**
+     * Mô tả : login
+     * @param
+     * @return
+     * Created by: Lê Thiện Tuấn - MF1118
+     * Created date: 16:02 31/05/2022
+     */
+    async onLoginClick() {
+      try {
+        const res = await axios.post('http://localhost:5290/api/v1/Users/Login', this.loginForm, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+          },
+        });
+        if (res.status == 200) {
+          this.$router.push('/asset');
+          this.setUser(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+
+  data() {
+    return {
+      loginForm: {
+        email: '',
+        password: '',
+      },
+    };
+  },
+};
+</script>
+<style></style>

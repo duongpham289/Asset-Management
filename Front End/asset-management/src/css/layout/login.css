@@ -1,12 +1,6 @@
-#frmLogin {
-  height: 100vh !important;
-  color: #4f4f4f;
-  margin: 0;
-  line-height: 1.6;
-  background-color: #fff;
-}
-
-.login {
+.m-login {
+  width: 100%;
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -14,15 +8,14 @@
   align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(../../assets/img/Op3-Background-1920.png);
-  height: 100%;
+  /* background-image: url(/src/assets/img/Op3-Background-1920.png); */
 }
 
-.grid-login {
+.m-login .grip-login {
   width: 770px;
   display: flex;
   align-items: center;
-  /* flex-direction: column; */
+
   box-sizing: border-box;
   border-radius: 8px;
   background-color: #fff;
@@ -31,15 +24,16 @@
   position: absolute;
   height: 560px;
 }
-.img-login {
-  /* background-image: url(../assets/img/img_Login-Local.png); */
-  width: 100%;
-  height: 100%;
-}
 
-.half-ctn {
+.m-login .grip-login .half-ctn {
   width: 50% !important;
   text-align: center;
+}
+
+.m-login .grip-login .left-grip {
+  /* background-image: url(/src/assets/img/img_Login-Local.png); */
+  width: 100%;
+  height: 100%;
 }
 
 .main-login-ctn {
@@ -51,15 +45,14 @@
 }
 
 .input-login {
-  width: 100% !important;
+  width: 100%;
   height: 44px !important;
-  padding: 0px 20px !important;
-  margin-top: 16px !important;
-  border-radius: 4px !important;
+  padding: 0px 20px;
+  margin-top: 16px;
+  border-radius: 4px;
   outline: none;
-  border: 1px solid #dadce0 !important;
-  font-size: 13px;
-  /* align-items: center; */
+  border: 1px solid #dadce0;
+  font-size: 13px !important;
   box-sizing: border-box;
   background-color: white;
   white-space: nowrap;
@@ -67,17 +60,10 @@
   text-overflow: ellipsis;
 }
 
-.input-login .m-border {
-  border: none !important;
+.input-login:focus {
+  border-color: #22a7ca;
 }
 
-.input-login .m-input:hover {
-  border: none !important;
-}
-
-.input-login .m-input:focus {
-  border: none !important;
-}
 .button {
   width: 100%;
   height: 44px;
@@ -96,11 +82,15 @@
   height: 60px;
   width: 100px;
   background-size: cover;
-
+  /* background-image: url(/src/assets/icon/MISA_VN.svg); */
   background-size: contain;
 }
 
 .logo-text {
   text-align: center;
   font-size: 15px;
+}
+
+.input-login:placeholder-shown {
+  font-family: MISA Font;
 }

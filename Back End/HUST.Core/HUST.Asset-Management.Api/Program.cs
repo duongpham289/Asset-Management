@@ -3,6 +3,7 @@ using HUST.Core.Interfaces.Services;
 using HUST.Core.Services;
 using HUST.Infrastructor.Library;
 using HUST.Infrastructor.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromDays(1);
+        options.SlidingExpiration = true;
+    });
 
 // Thêm Policy của CORS
 builder.Services.AddCors(options =>
@@ -64,7 +71,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
+
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapRazorPages();
+app.MapDefaultControllerRoute();
+
 
 app.MapControllers();
 
