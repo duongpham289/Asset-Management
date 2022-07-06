@@ -214,11 +214,7 @@
         >?</span
       >
 
-      <span v-else
-        >Tài sản có mã chứng từ
-        <strong> {{ alert.title.FixedAssetCode }} </strong> đã phát sinh ghi
-        tăng có mã <strong>{{ alert.title.LicenseCode }}</strong>
-      </span>
+      <span v-else>Chọn ít nhất một tài sản để xóa </span>
     </BaseAlert>
 
     <BaseToast v-if="toast.isShow" :title="toast.title"> </BaseToast>
