@@ -13,6 +13,7 @@
 @import url(./base/input.css);
 @import url(./base/dropdown.css);
 @import url(./base/alert.css);
+@import url(./base/combobox.css);
 
 @import url('@/assets/font-awesome/css/all.min.css');
 /* @import url(./base/dialog.css); */
