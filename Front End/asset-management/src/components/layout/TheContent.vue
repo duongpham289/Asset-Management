@@ -27,6 +27,7 @@
         <BaseButton
           style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16)"
           buttonTitle="+Thêm tài sản"
+          @click="showAddDialog"
         ></BaseButton>
         <div class="toolbar-btn icon-box cursor-pointer" @click="importFromExcelOnClick">
           <div class=""><i class="fa-solid fa-file-circle-plus"></i></div>
@@ -292,6 +293,33 @@ export default {
   },
 
   methods: {
+    async getNewAssetCode() {
+      try {
+        var res = await axios.get(
+          'http://localhost:5290/api/v1/FixedAssets/NewFixedAssetCode'
+        );
+        // Gán dữ liệu trả về vào asset Code mới
+        this.newAssetCode = res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async showAddDialog() {
+      await this.getNewAssetCode();
+      this.assetSelected = {
+        FixedAssetCode: this.newAssetCode,
+        Cost: 0,
+        DepreciationRate: 0,
+        DepreciationValue: 0,
+        Quantity: 0,
+        PurchaseDate: new Date(),
+        UseDate: new Date(),
+      };
+      this.dialogShow(true);
+      this.isEditing = false;
+    },
+
     isShowDlgImportFirstOnClick() {
       this.isShowDragFolder = false;
     },
@@ -556,6 +584,7 @@ export default {
       searchBox: null,
       pageIndex: null,
       pageSize: null,
+      newAssetCode: null,
     };
   },
 };
