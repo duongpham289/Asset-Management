@@ -185,21 +185,21 @@
         <div class="modal-row">
           <div class="modal-field">
             <label for="input">Ngày mua <span>*</span></label>
-            <Datepicker
+            <DatePicker
               :required="true"
               name="Ngày mua"
               ref="purchaseDate"
               v-model="asset.PurchaseDate"
-            ></Datepicker>
+            ></DatePicker>
           </div>
           <div class="modal-field">
             <label for="input">Ngày bắt đầy sử dụng <span>*</span></label>
-            <Datepicker
+            <DatePicker
               :required="true"
               name="Ngày bắt đầu sử dụng"
               ref="UseDate"
               v-model="asset.UseDate"
-            ></Datepicker>
+            ></DatePicker>
           </div>
         </div>
       </form>
@@ -407,11 +407,11 @@ export default {
      */
     autoFieldData() {
       // Ngày tạo
-      if (!this.isEditing) {
-        this.asset.CreatedDate = new Date();
-      }
-      // Ngày sứa
-      this.asset.ModifiedDate = new Date();
+      // if (!this.isEditing) {
+      //   this.asset.CreatedDate = new Date();
+      // }
+      // // Ngày sứa
+      // this.asset.ModifiedDate = new Date();
       // Tính Năm sử dụng(Năm hiện tại - năm ngày bắt đầu sử dụng)
       this.asset.ProductionYear =
         this.asset.TrackedYear - new Date(this.asset.UseDate).getFullYear();
@@ -524,23 +524,6 @@ export default {
           this.errorList.push(`${error_msg.EMPTY_VALUE}${element.name}`);
         }
       });
-
-      // 2. Validate nghiệp vụ:
-      // 2.1 Tỉ lệ hao mòn khác 1/số năm sử dụng:
-      if (this.asset.LifeTime == 0 && this.asset.DepreciationRate != 0) {
-        this.errorList.push("Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng");
-      } else if (
-        this.asset.LifeTime != 0 &&
-        this.asset.DepreciationRate !=
-          Number((1 / this.asset.LifeTime).toFixed(4))
-      ) {
-        this.errorList.push("Tỷ lệ hao mòn năm phải bằng 1/Số năm sử dụng");
-      }
-
-      // 2.2 Hao mòn năm nhỏ hơn nguyên giá:
-      if (Number(this.asset.DepreciationValue) > Number(this.asset.Cost)) {
-        this.errorList.push("Hao mòn năm phải nhỏ hơn hoặc bằng nguyên giá");
-      }
 
       // 3. Nếu không có lỗi gì thì thực hiện thêm hoặc sửa
       if (this.errorList.length != 0) {

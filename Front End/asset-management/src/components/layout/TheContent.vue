@@ -29,11 +29,8 @@
           buttonTitle="+Thêm tài sản"
           @click="showAddDialog"
         ></BaseButton>
-        <div
-          class="toolbar-btn icon-box cursor-pointer"
-          @click="importFromExcelOnClick"
-        >
-          <div class=""><i class="fa-solid fa-file-circle-plus"></i></div>
+        <div class="toolbar-btn icon-box cursor-pointer" @click="importFromExcelOnClick">
+          <div class="">+</div>
         </div>
         <div
           class="toolbar-btn icon-box cursor-pointer"
