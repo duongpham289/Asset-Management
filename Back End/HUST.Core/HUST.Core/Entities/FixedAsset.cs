@@ -167,11 +167,11 @@ namespace HUST.Core.Entities
         [HUSTPropExport(("Năm sử dụng"))]
         public int? ProductionYear { get; set; }
 
-        [NotMap]
-        public bool? IsValid { get; set; } = true;
+        //[NotMap]
+        //public bool? IsValid { get; set; } = true;
 
-        [NotMap]
-        public Dictionary<string, string>? ErrorValidateNotValid { get; set; } = new Dictionary<string, string>();
+        //[NotMap]
+        //public Dictionary<string, string>? ErrorValidateNotValid { get; set; } = new Dictionary<string, string>();
 
     }
 }

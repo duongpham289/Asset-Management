@@ -5687,19 +5687,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DUONG.PH187315\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\HUST.Asset-Management.Api.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\qlts\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\HUST.Asset-Management.Api.csproj",
       "projectName": "HUST.Asset-Management.Api",
-      "projectPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\HUST.Asset-Management.Api.csproj",
-      "packagesPath": "C:\\Users\\DUONG.PH187315\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\obj\\",
+      "projectPath": "C:\\Users\\ADMIN\\Desktop\\qlts\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\HUST.Asset-Management.Api.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ADMIN\\Desktop\\qlts\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DUONG.PH187315\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5713,11 +5713,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj": {
-              "projectPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj"
+            "C:\\Users\\ADMIN\\Desktop\\qlts\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\Desktop\\qlts\\Asset-Management\\Back End\\HUST.Core\\HUST.Core\\HUST.Core.csproj"
             },
-            "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj": {
-              "projectPath": "D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj"
+            "C:\\Users\\ADMIN\\Desktop\\qlts\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\Desktop\\qlts\\Asset-Management\\Back End\\HUST.Core\\HUST.Infrastructor\\HUST.Infrastructor.csproj"
             }
           }
         }
@@ -5763,16 +5763,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\Work\\Asset-Management\\Back End\\HUST.Core\\HUST.Asset-Management.Api\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

@@ -42,7 +42,7 @@ namespace HUST.Core.Services
                     _iDepartmentRepository.Insert(newDepartment);
                 }
                 ValidateAfterInsertToDB(fixedAsset, fixedAssetsFromClient);
-                if (fixedAsset.IsValid == true)
+                if (true)
                 {
                     if (_fixedAssettRepository.GetByName(fixedAsset.FixedAssetName) != null && _iDepartmentRepository.GetByName(fixedAsset.DepartmentName) != null)
                     {
@@ -71,24 +71,7 @@ namespace HUST.Core.Services
 
             base.ValidationObject(fixedAssetToValidate);
 
-            if (_error.Count() > 0)
-            {
-                fixedAssetToValidate.IsValid = false;
-                fixedAssetToValidate.ErrorValidateNotValid = _error;
-            }
-            if (fixedAssetToValidate.FixedAssetCode != null && CheckCodeExistInFile(fixedAssetToValidate.FixedAssetCode, fixedAssetToValidate.FixedAssetId, fixedAssetsFile))
-            {
-                fixedAssetToValidate.IsValid = false;
-                _error.Add("FixedAssetCode", $"Mã tài sản không được phép trùng lặp trong file");
-                fixedAssetToValidate.ErrorValidateNotValid = _error;
-            }
-            if (_fixedAssettRepository.CheckCodeExist(fixedAssetToValidate.FixedAssetCode) == true)
-            {
-                fixedAssetToValidate.IsValid = false;
-                _error.Add("FixedAssetCode", $"Mã tài sản đã tồn tại");
-                fixedAssetToValidate.ErrorValidateNotValid = _error;
-            }
-
+           
             return fixedAssetToValidate;
         }
 
