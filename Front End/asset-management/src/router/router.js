@@ -1,22 +1,21 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Home from "../components/layout/BaseHome.vue";
-import Login from "../components/layout/TheLogin.vue";
-import store from "../store/store";
-import HUSTContent from "../components/layout/TheContent.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../components/layout/BaseHome.vue';
+import Login from '../components/layout/TheLogin.vue';
+import store from '../store/store';
+import HUSTContent from '../components/layout/TheContent.vue';
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    redirect: '/asset',
+    name: 'Home',
     component: Home,
     meta: { requiresAuth: true },
-    children: [
-      { path: "/asset", component: HUSTContent },
-    ],
+    children: [{ path: '/asset', component: HUSTContent }],
   },
   {
-    path: "/login",
-    name: "Login",
+    path: '/login',
+    name: 'Login',
     component: Login,
   },
 ];
@@ -41,7 +40,7 @@ router.beforeEach((to, from, next) => {
       next();
       return;
     }
-    next("/login");
+    next('/login');
   } else {
     next();
   }
