@@ -116,18 +116,18 @@ namespace HUST.Core.Services
                 // Kiểu dữ liệu của prop:
                 var propType = prop.PropertyType;
 
-                var isNotMap = prop.IsDefined(typeof(NotMap), true);
+                //var isNotMap = prop.IsDefined(typeof(NotMap), true);
 
                 // Kiểm tra xem có friendly name hay không
                 var isFriendlyName = prop.IsDefined(typeof(FriendlyName), true);
-                if (isFriendlyName && !isNotMap)
+                if (isFriendlyName)
                 {
                     propFriendlyName = (prop.GetCustomAttributes(typeof(FriendlyName), true)[0] as FriendlyName).Name;
                 }
 
                 // 1. Thông tin bắt buộc nhập
                 var isNotNullOrEmpty = prop.IsDefined(typeof(IsNotNullOrEmpty), true);
-                if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == "") && !isNotMap)
+                if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == ""))
                 {
                     isValidate = false;
                     ValidateErrorsMsg.Add(string.Format("", propFriendlyName));
@@ -135,7 +135,7 @@ namespace HUST.Core.Services
 
                 // 2. Thông tin giới hạn về độ dài
                 var isMaxLength = prop.IsDefined(typeof(MaxLength), true);
-                if (isMaxLength && !isNotMap)
+                if (isMaxLength)
                 {
                     var maxLength = (prop.GetCustomAttributes(typeof(MaxLength), true)[0] as MaxLength).Length;
                     if (propValue.ToString().Length > maxLength)
@@ -183,7 +183,7 @@ namespace HUST.Core.Services
                 }
                 // 1. Thông tin bắt buộc nhập
                 var isNotNullOrEmpty = prop.IsDefined(typeof(IsNotNullOrEmpty), true);
-                if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == "") && !isNotMap)
+                if (isNotNullOrEmpty == true && (propValue == null || propValue.ToString() == ""))
                 {
                     isValidate = false;
                     _error.Add(propName, $"{propFriendlyName} không được phép để trống");
@@ -193,7 +193,7 @@ namespace HUST.Core.Services
                 if (isMaxLength)
                 {
                     var maxLength = (prop.GetCustomAttributes(typeof(MaxLength), true)[0] as MaxLength).Length;
-                    if (propValue.ToString().Length > maxLength && !isNotMap)
+                    if (propValue.ToString().Length > maxLength)
                     {
                         isValidate = false;
                         _error.Add(propName, $"{propFriendlyName} không được phép vượt quá ${maxLength}");
