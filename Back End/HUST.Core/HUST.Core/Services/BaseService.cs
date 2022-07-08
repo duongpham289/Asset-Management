@@ -78,7 +78,7 @@ namespace HUST.Core.Services
             // lấy FiendLy Name của entity:
             if (_baseRepository.CheckCodeExist(entityCodeToCheck, entityId) == true)
             {
-                ValidateErrorsMsg.Add(string.Format("Code", entityFriendlyName));
+                ValidateErrorsMsg.Add($"{entityFriendlyName} đã tồn tại trong hệ thống");
             }
 
             // Thực hiện thêm mới dữ liệu: 
