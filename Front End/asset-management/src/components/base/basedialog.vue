@@ -2,7 +2,7 @@
   <div class="m-dialog">
     <div class="m-modal">
       <div class="m-modal-title">{{ dialogTitle }}</div>
-      <div class="m-modal-close" @click="onCancel">
+      <div class="m-modal-close tooltip" tooltip="Đóng" @click="onCancel">
         <div class="close"></div>
       </div>
 

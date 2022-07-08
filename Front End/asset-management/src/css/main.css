@@ -17,6 +17,8 @@
 @import url(./base/datePicker.css);
 @import url(./base/spinner.css);
 @import url(./base/dialog.css);
+@import url(./base/tooltip.css);
+
 @import url('@/assets/font-awesome/css/all.min.css');
 /* @import url(./base/dialog.css); */
 

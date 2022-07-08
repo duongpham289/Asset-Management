@@ -14,14 +14,14 @@
   padding: 0 15px;
 }
 
-.m-navbar .m-navbar-header .navbar-header-logo {
-  background-image: url(../../assets/icon/QLTS-Icon-16x16.ico);
+/* .m-navbar .m-navbar-header .navbar-header-logo {
+  background: url('../../assets/icon/qlts-icon.png') no-repeat -20px -680px;
   background-color: #fff;
   width: 36px;
   height: 36px;
   background-repeat: no-repeat;
   background-size: contain;
-}
+} */
 
 .m-navbar .m-navbar-header .navbar-header-title {
   color: #fff;

@@ -106,7 +106,7 @@ table.m-table {
 }
 
 .m-table thead {
-  z-index: 2;
+  z-index: 1;
   position: sticky;
   top: 0;
   right: 0;

@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .icon-box-36 {
@@ -12,6 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 /* common icon */
@@ -19,6 +21,18 @@
   background: url('../../assets/icon/qlts-icon.png') no-repeat -287px -67px;
   width: 18px;
   height: 18px;
+}
+
+.import {
+  background: url('../../assets/icon/qlts-icon.png') no-repeat -288px -507px;
+  width: 16px;
+  height: 18px;
+}
+
+.navbar-header-logo {
+  background: url('../../assets/icon/qlts-icon.png') no-repeat -20px -680px;
+  width: 36px;
+  height: 36px;
 }
 
 .clear {

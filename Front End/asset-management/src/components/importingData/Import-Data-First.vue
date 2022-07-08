@@ -1,6 +1,6 @@
 <template>
   <div class="m-dialog-box">
-    <div class="m-dialog m-dlg-show m-dlg-import">
+    <div class="m-dialog2 m-dlg-show m-dlg-import">
       <div class="dialog-header dlg-header-show">
         <div class="m-popup-title m-import-dlg">Nhập khẩu nguyên vật liệu</div>
         <div class="m-popup-close" @click="showAlertDlg">
@@ -101,10 +101,14 @@
                       <tr>
                         <th class="m-table-validate txt-left">MÃ Tài SẢN</th>
                         <th class="m-table-validate txt-left">TÊN TÀI SẢN</th>
-                        <th class="m-table-validate txt-left">MÃ VỊ TRÍ</th>
-                        <th class="m-table-validate txt-left">TÊN VỊ TRÍ</th>
-                        <th class="txt-left">MÃ DANH MỤC</th>
-                        <th class="txt-left">TÊN DANH MỤC</th>
+                        <th class="m-table-validate txt-left">
+                          TÊN BỘ PHẬN SỬ DỤNG
+                        </th>
+                        <th class="m-table-validate txt-left">
+                          TÊN LOẠI TÀI SẢN
+                        </th>
+                        <th class="txt-left">NGÀY MUA</th>
+                        <th class="txt-left">NGÀY BẮT ĐẦU SỬ DỤNG</th>
                         <th class="m-table-validate-action txt-left"></th>
                       </tr>
                     </thead>
@@ -232,9 +236,9 @@
 <script>
 // eslint-disable-next-line
 /*eslint-disable */
-import { ref } from "vue";
-import DropZone from "@/components/importingData/Drop-zone.vue";
-import axios from "axios";
+import { ref } from 'vue';
+import DropZone from '@/components/importingData/Drop-zone.vue';
+import axios from 'axios';
 
 export default {
   components: { DropZone },
@@ -305,9 +309,9 @@ export default {
           const errorInputFixedAssetCode = document.getElementById(
             `FixedAssetCode-${index}`
           ).style;
-          errorInputFixedAssetCode.border = "1px solid red";
+          errorInputFixedAssetCode.border = '1px solid red';
           //Hiển thị lỗi trả về
-          this.listErrValidate[index] = "Mã tài sản không được phép để trống";
+          this.listErrValidate[index] = 'Mã tài sản không được phép để trống';
           this.isValidForInsert = false;
         }
         if (!data.FixedAssetName) {
@@ -315,9 +319,9 @@ export default {
           const errorInputFixedAssetName = document.getElementById(
             `FixedAssetName-${index}`
           ).style;
-          errorInputFixedAssetName.border = "1px solid red";
+          errorInputFixedAssetName.border = '1px solid red';
           //Hiển thị lỗi trả về
-          this.listErrValidate[index] = "Tên tài sản không được phép để trống";
+          this.listErrValidate[index] = 'Tên tài sản không được phép để trống';
           this.isValidForInsert = false;
         }
         if (!data.DepartmentCode) {
@@ -325,9 +329,9 @@ export default {
           const errorInputDepartmentCode = document.getElementById(
             `DepartmentCode-${index}`
           ).style;
-          errorInputDepartmentCode.border = "1px solid red";
+          errorInputDepartmentCode.border = '1px solid red';
           //Hiển thị lỗi trả về
-          this.listErrValidate[index] = "Mã bộ phận không được phép để trống";
+          this.listErrValidate[index] = 'Mã bộ phận không được phép để trống';
           this.isValidForInsert = false;
         }
         if (!data.DepartmentName) {
@@ -335,9 +339,9 @@ export default {
           const errorInputDepartmentName = document.getElementById(
             `DepartmentName-${index}`
           ).style;
-          errorInputDepartmentName.border = "1px solid red";
+          errorInputDepartmentName.border = '1px solid red';
           //Hiển thị lỗi trả về
-          this.listErrValidate[index] = "Tên bộ phận không được phép để trống";
+          this.listErrValidate[index] = 'Tên bộ phận không được phép để trống';
           this.isValidForInsert = false;
         }
         if (!data.FixedAssetCategoryCode) {
@@ -345,9 +349,9 @@ export default {
           const errorInputFixedAssetCategoryCode = document.getElementById(
             `FixedAssetCategoryCode-${index}`
           ).style;
-          FixedAssetCategoryCode.border = "1px solid red";
+          FixedAssetCategoryCode.border = '1px solid red';
           //Hiển thị lỗi trả về
-          this.listErrValidate[index] = "Mã nhóm tài sản được phép để trống";
+          this.listErrValidate[index] = 'Mã nhóm tài sản được phép để trống';
           this.isValidForInsert = false;
         }
         if (!data.FixedAssetCategoryName) {
@@ -355,10 +359,10 @@ export default {
           const errorInputFixedAssetCategoryName = document.getElementById(
             `FixedAssetCategoryName-${index}`
           ).style;
-          errorInputFixedAssetCategoryName.border = "1px solid red";
+          errorInputFixedAssetCategoryName.border = '1px solid red';
           //Hiển thị lỗi trả về
           this.listErrValidate[index] =
-            "Tên nhóm tài sản không được phép để trống";
+            'Tên nhóm tài sản không được phép để trống';
           this.isValidForInsert = false;
         }
       }
@@ -397,14 +401,14 @@ export default {
     async handleImportFileExcel() {
       var me = this;
       var formData = new FormData();
-      formData.append("formFile", me.dropzoneFile);
+      formData.append('formFile', me.dropzoneFile);
       await axios
         .post(
-          "http://localhost:5290/api/v1/FixedAssets/ImportingExcel",
+          'http://localhost:5290/api/v1/FixedAssets/ImportingExcel',
           formData,
           {
             headers: {
-              "Content-Type": "multipart/form-data",
+              'Content-Type': 'multipart/form-data',
             },
           }
         )
@@ -422,7 +426,7 @@ export default {
      * Created date: 08:08 02/06/2022
      */
     loadingData() {
-      this.$emit("loadingData");
+      this.$emit('loadingData');
     },
     /**
      * Mô tả : off dialog
@@ -430,20 +434,20 @@ export default {
      * Created date: 13:55 12/05/2022
      */
     showAlertDlg() {
-      this.$emit("isShowDlgImportFirstOnClick");
+      this.$emit('isShowDlgImportFirstOnClick');
       this.materialsToImport = [];
       this.dropzoneFile = null;
     },
   },
   setup() {
-    let dropzoneFile = ref("");
+    let dropzoneFile = ref('');
 
     const drop = (e) => {
       dropzoneFile.value = e.dataTransfer.files[0];
     };
 
     const selectedFile = () => {
-      dropzoneFile.value = document.querySelector(".dropzoneFile").files[0];
+      dropzoneFile.value = document.querySelector('.dropzoneFile').files[0];
     };
 
     return { dropzoneFile, drop, selectedFile };
@@ -476,7 +480,7 @@ input {
   display: block !important;
 }
 
-.m-dialog-box .m-dialog {
+.m-dialog-box .m-dialog2 {
   position: absolute;
   /* background-color: #fff; */
   top: 50%;

@@ -43,18 +43,24 @@
           @click="showAddDialog"
         ></BaseButton>
         <div
-          class="toolbar-btn icon-box cursor-pointer"
+          class="toolbar-btn icon-box cursor-pointer tooltip"
+          tooltip="Import"
           @click="importFromExcelOnClick"
         >
-          <div class="">+</div>
+          <div class="import"></div>
         </div>
         <div
-          class="toolbar-btn icon-box cursor-pointer"
+          class="toolbar-btn icon-box cursor-pointer tooltip"
+          tooltip="Export"
           @click="exportToExcelOnClick"
         >
           <div class="excel"></div>
         </div>
-        <div class="toolbar-btn icon-box cursor-pointer" @click="btnRemove">
+        <div
+          class="toolbar-btn icon-box cursor-pointer tooltip"
+          tooltip="Xóa"
+          @click="btnRemove"
+        >
           <div class="remove"></div>
         </div>
       </div>
@@ -73,7 +79,10 @@
           <thead>
             <tr>
               <th style="padding-left: 16px; width: 50px">
-                <BaseCheckbox></BaseCheckbox>
+                <BaseCheckbox
+                  :checked="checkedAll"
+                  @click="onCheckedAll"
+                ></BaseCheckbox>
               </th>
               <th class="text-align-center w-50">STT</th>
               <th class="text-align-left w-130">Mã tài sản</th>
@@ -94,7 +103,7 @@
           <div v-else-if="this.assetData.length == 0" class="table-msg">
             Không có dữ liệu
           </div>
-          <tbody>
+          <tbody v-else>
             <tr
               @dblclick="showEditDialog(asset)"
               v-for="(asset, index) in assetData"
@@ -142,10 +151,10 @@
                   class="m-function-box"
                   style="display: none; padding-left: 10px"
                 >
-                  <div class="icon-box-36 edit">
+                  <div class="icon-box-36 edit tooltip" tooltip="Sửa">
                     <div class="table-icon edit"></div>
                   </div>
-                  <div class="icon-box-36 copy">
+                  <div class="icon-box-36 copy tooltip" tooltip="Nhân bản">
                     <div class="table-icon copy"></div>
                   </div>
                 </div>
@@ -218,6 +227,7 @@
       @filterAsset="filterAsset"
       @getAssetData="getAssetData"
       @dialogShow="dialogShow"
+      @toastShow="toastShow"
     ></BaseDialog>
 
     <BaseAlert
@@ -329,6 +339,30 @@ export default {
   },
 
   methods: {
+    onCheckedAll() {
+      // 1. Lọc danh sách những tàn sản đã chọn:
+      this.checkedaAssetList = this.assetData.filter(
+        (asset) => asset.checked == true
+      );
+
+      //  Kiểm tra xem assetData có dữ liệu không
+      if (this.assetData == 0) {
+        this.alertShow(true, 'Chưa có tài sản nào để chọn');
+      } else {
+        //kiểm tra xem có tích hết chưa
+        // Nếu chưa chưa thì tích hết
+        if (this.checkedaAssetList.length != this.assetData.length) {
+          this.checkedAll = true;
+          this.assetData.forEach((asset) => (asset.checked = true));
+        }
+        // nếu tích hết rồi thì click thứ 2 sẽ bỏ hết tích đi
+        else {
+          this.checkedAll = false;
+          this.assetData.forEach((asset) => (asset.checked = false));
+        }
+      }
+    },
+
     filterClick() {
       this.pageIndex = 1;
       this.filterAsset();
@@ -451,26 +485,19 @@ export default {
             },
           }
         );
-        console.log(res.data);
-        // Nếu trả về 1 object => có lỗi tài sản đã có chứng từ không xóa được
-        if (typeof res.data == 'object') {
-          this.alertShow(true, res.data);
-        }
-        // Không có lỗi thì load lại bảng
-        else {
-          // Load lại bảng
-          this.filterAsset();
+        console.log(res.response);
+        // Load lại bảng
+        this.filterAsset();
 
-          // Cập nhật lại tổng bản ghi
-          this.getAssetData();
+        // Cập nhật lại tổng bản ghi
+        this.getAssetData();
 
-          //  Hiển thị toast xóa thành công
-          this.toastShow('Xóa dữ liệu thành công');
-          // gán lại giá trị cho list tạm thời về rỗng
-          this.checkedaAssetList = [];
-          // Tắt alert
-          this.alertShow(false);
-        }
+        //  Hiển thị toast xóa thành công
+        this.toastShow('Xóa dữ liệu thành công');
+        // gán lại giá trị cho list tạm thời về rỗng
+        this.checkedaAssetList = [];
+        // Tắt alert
+        this.alertShow(false);
       } catch (error) {
         console.log(error);
       }
@@ -617,6 +644,7 @@ export default {
   },
   data() {
     return {
+      checkedAll: false,
       isLostConnection: false,
       alert: {
         title: '',

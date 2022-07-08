@@ -1,0 +1,13 @@
+.tooltip:hover:after {
+  background: #fff;
+  border-radius: 5px;
+  color: #000;
+  content: attr(tooltip);
+  padding: 5px 15px;
+  position: absolute;
+  z-index: 99998;
+  top: calc(100% + 5px);
+  right: 0;
+  width: max-content;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.273);
+}

@@ -1,7 +1,9 @@
 <template>
   <div class="m-navbar" :style="{ width: navBarWidth + 'px' }">
     <div class="m-navbar-header">
-      <div class="navbar-header-logo"></div>
+      <div class="icon-box-36">
+        <div class="navbar-header-logo"></div>
+      </div>
       <div v-if="!isNavBarClose" class="navbar-header-title">QLTS</div>
     </div>
 
@@ -72,15 +74,11 @@ export default {
           childList: [{ childTitle: 'Tổng quan 1' }],
         },
         {
-          title: 'Tài sản HT-ĐB',
+          title: 'Nhân viên',
           icon: 'line',
           childList: [{ childTitle: 'Tổng quan 1' }],
         },
-        {
-          title: 'Công cụ dụng cụ',
-          icon: 'tool',
-          childList: [{ childTitle: 'Tổng quan 1' }],
-        },
+
         { title: 'Danh mục', icon: 'category' },
         {
           title: 'Tra cứu',
